@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crop Quality Predictor</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.0"></script>
+    <style>
+    body { 
+    font-family: Arial, sans-serif; 
+    padding: 20px;
+    background-image: url(qualitypredictor.jpg);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container { 
+    max-width: 500px; 
+    background-color: rgba(255, 255, 255, 0.785);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color:#17812e
+}
+
+.input-group {
+    margin: 10px 0;
+    display: flex;
+    margin-top: 15px;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
+
+button {
+    width: 80%;
+    padding: 12px;
+    background-color: #28a745;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+#imagePreview {
+    max-width: 80%;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+#result {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+#status {
+    color: #666;
+    font-size: 0.9em;
+}
+
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Smart Crop Quality Predictor</h1>
+        <input type="file" id="imageInput" accept="image/*">
+        <img id="imagePreview">
+
+        <div class="input-group">
+            <label>Temperature (°C):</label>
+            <input type="number" id="temp" step="0.1" value="25">
+        </div>
+
+        <div class="input-group">
+            <label>Humidity (%):</label>
+            <input type="number" id="humidity" step="0.1" value="60">
+        </div>
+
+        <div class="input-group">
+            <label>Soil pH:</label>
+            <input type="number" id="soilPH" step="0.1" value="6.5">
+        </div>
+
+        <div class="input-group">
+            <label>Soil Moisture (%):</label>
+            <input type="number" id="moisture" step="0.1" value="50">
+        </div>
+
+        <div class="input-group">
+            <label>Rainfall (mm):</label>
+            <input type="number" id="rainfall" step="0.1" value="100">
+        </div>
+
+        <button onclick="predict()">Predict Quality</button>
+
+        <div id="result" style="margin-top: 20px; font-size: 1.2em;"></div>
+        <div id="status" style="color: #666;"></div>
+    </div>
+
+    <script>
+        let model;
+        let mobileNet;
+        const CLASSES = ['Poor', 'Fair', 'Good', 'Excellent'];
+
+        async function init() {
+            document.getElementById('status').textContent = 'Loading models...';
+
+            // Load MobileNet with feature extraction
+            mobileNet = await mobilenet.load();
+
+            // Fine-tuned model with MobileNet features
+            model = tf.sequential({
+                layers: [
+                    tf.layers.dense({ units: 512, activation: 'relu', inputShape: [1029] }),
+                    tf.layers.batchNormalization(),
+                    tf.layers.dropout(0.4),
+                    tf.layers.dense({ units: 256, activation: 'relu' }),
+                    tf.layers.batchNormalization(),
+                    tf.layers.dropout(0.3),
+                    tf.layers.dense({ units: 128, activation: 'relu' }),
+                    tf.layers.dense({ units: 4, activation: 'softmax' })
+                ]
+            });
+
+            model.compile({
+                optimizer: tf.train.adam(0.0003),
+                loss: 'categoricalCrossentropy',
+                metrics: ['accuracy']
+            });
+
+            await trainModel();
+        }
+
+        async function trainModel() {
+            document.getElementById('status').textContent = 'Training model...';
+
+            const xs = [];
+            const ys = [];
+
+            for (let i = 0; i < 2000; i++) {
+                const temp = 10 + Math.random() * 30;
+                const humidity = 30 + Math.random() * 50;
+                const soilPH = 5 + Math.random() * 3;
+                const moisture = 20 + Math.random() * 60;
+                const rainfall = 50 + Math.random() * 200;
+
+                // Generate image features (real crop image dataset should be used)
+                const features = new Array(1024).fill(0).map(() => Math.random() * 2 - 1);
+
+                let quality;
+                if (temp > 38 || humidity < 35 || soilPH < 5.5 || moisture < 25 || rainfall < 60) quality = 0;
+                else if (temp < 18 || humidity > 75 || soilPH > 7.5 || moisture > 75 || rainfall > 180) quality = 1;
+                else if (temp >= 20 && temp <= 30 && humidity >= 50 && humidity <= 70 && soilPH >= 6 && soilPH <= 7.5 && rainfall >= 80 && rainfall <= 160) {
+                    quality = 2 + Math.floor(Math.random() * 2);
+                } else quality = 1;
+
+                xs.push([...features, temp / 40, humidity / 100, soilPH / 10, moisture / 100, rainfall / 200]);
+                ys.push(tf.oneHot(quality, 4).arraySync());
+            }
+
+            await model.fit(tf.tensor2d(xs), tf.tensor2d(ys), {
+                epochs: 100,
+                batchSize: 64,
+                validationSplit: 0.2
+            });
+
+            document.getElementById('status').textContent = 'Model ready!';
+        }
+
+        document.getElementById('imageInput').addEventListener('change', async (e) => {
+            const img = document.getElementById('imagePreview');
+            img.src = URL.createObjectURL(e.target.files[0]);
+        });
+
+        async function predict() {
+            const imgElement = document.getElementById('imagePreview');
+            const temp = parseFloat(document.getElementById('temp').value);
+            const humidity = parseFloat(document.getElementById('humidity').value);
+            const soilPH = parseFloat(document.getElementById('soilPH').value);
+            const moisture = parseFloat(document.getElementById('moisture').value);
+            const rainfall = parseFloat(document.getElementById('rainfall').value);
+
+            if (!imgElement.src || isNaN(temp) || isNaN(humidity) || isNaN(soilPH) || isNaN(moisture) || isNaN(rainfall)) {
+                alert('Please provide all inputs');
+                return;
+            }
+
+            // Extract image features
+            const imageTensor = tf.browser.fromPixels(imgElement).resizeNearestNeighbor([224, 224]).toFloat().expandDims();
+            const imageFeatures = mobileNet.infer(imageTensor, 'conv_preds');
+            const imageFeatureArray = await imageFeatures.data();
+
+            // Prepare input
+            const inputTensor = tf.tensor2d([[
+                ...imageFeatureArray.slice(0, 1024),
+                temp / 40,
+                humidity / 100,
+                soilPH / 10,
+                moisture / 100,
+                rainfall / 200
+            ]]);
+
+            // Make prediction
+            const prediction = model.predict(inputTensor);
+            const results = await prediction.data();
+
+            const qualityIndex = results.indexOf(Math.max(...results));
+            const quality = CLASSES[qualityIndex];
+            const confidence = Math.max(...results) * 100;
+
+            document.getElementById('result').innerHTML = `
+                Predicted Quality: <strong>${quality}</strong><br>
+                Confidence: ${confidence.toFixed(1)}%
+            `;
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>

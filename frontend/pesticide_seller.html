@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fertilizer Seller Login</title>
+  <link rel="stylesheet" href="styles_ps.css">
+  <style>
+    /* Ensure the select element matches the form styling */
+    select {
+      padding: 0.9rem;
+      width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      background-color: #f0f8f0; /* Light green background, adjust as per styles_ps.css */
+      margin-bottom: 1rem;
+      font-family: 'Georgia', serif; /* Match font if used in styles_ps.css */
+    }
+
+    select:focus {
+      border-color: #4CAF50; /* Green border, adjust as per styles_ps.css */
+      outline: none;
+      box-shadow: 0 0 6px rgba(76, 175, 80, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="title">Fertilizer Seller Login</h1>
+    <select id="languageSelect" onchange="changeLanguage()">
+      <option value="en">English</option>
+      <option value="hi">हिन्दी</option>
+      <option value="mr">मराठी</option>
+      <option value="te">తెలుగు</option>
+      <option value="ta">தமிழ்</option>
+      <option value="kn">ಕನ್ನಡ</option>
+    </select>
+    <form id="pesticide-seller-login-form">
+      <label for="name" id="nameLabel">Name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter Your Name" required />
+
+      <label for="securityCode" id="passwordLabel">Password:</label>
+      <input type="password" id="securityCode" name="securityCode" placeholder="Enter Your Password" required />
+
+      <button type="submit" id="loginButton">Login</button>
+    </form>
+  </div>
+
+  <script>
+    const translations = {
+      en: {
+        title: "Pesticide Seller Login",
+        nameLabel: "Name:",
+        passwordLabel: "Password:",
+        loginButton: "Login",
+        successMessage: "Login successful!",
+        errorMessage: "Invalid credentials. Please try again."
+      },
+      hi: {
+        title: "कीटनाशक विक्रेता लॉगिन",
+        nameLabel: "नाम:",
+        passwordLabel: "पासवर्ड:",
+        loginButton: "लॉगिन",
+        successMessage: "लॉगिन सफल!",
+        errorMessage: "अमान्य प्रमाणपत्र। कृपया पुनः प्रयास करें।"
+      },
+      mr: {
+        title: "कीटकनाशक विक्रेता लॉगिन",
+        nameLabel: "नाव:",
+        passwordLabel: "पासवर्ड:",
+        loginButton: "लॉगिन",
+        successMessage: "लॉगिन यशस्वी!",
+        errorMessage: "अवैध क्रेडेन्शियल्स. कृपया पुन्हा प्रयत्न करा."
+      },
+      te: {
+        title: "పురుగుమందుల విక్రేత లాగిన్",
+        nameLabel: "పేరు:",
+        passwordLabel: "పాస్‌వర్డ్:",
+        loginButton: "లాగిన్",
+        successMessage: "లాగిన్ విజయవంతం!",
+        errorMessage: "చెల్లని ఆధారాలు. దయచేసి మళ్లీ ప్రయత్నించండి."
+      },
+      ta: {
+        title: "பூச்சிக்கொல்லி விற்பனையாளர் உள்நுழைவு",
+        nameLabel: "பெயர்:",
+        passwordLabel: "கடவுச்சொல்:",
+        loginButton: "உள்நுழை",
+        successMessage: "உள்நுழைவு வெற்றிகரமாக!",
+        errorMessage: "தவறான சான்றுகள். மீண்டும் முயற்சிக்கவும்."
+      },
+      kn: {
+        title: "ಕೀಟನಾಶಕ ಮಾರಾಟಗಾರ ಲಾಗಿನ್",
+        nameLabel: "ಹೆಸರು:",
+        passwordLabel: "ಪಾಸ್‌ವರ್ಡ್:",
+        loginButton: "ಲಾಗಿನ್",
+        successMessage: "ಲಾಗಿನ್ ಯಶಸ್ವಿಯಾಗಿದೆ!",
+        errorMessage: "ಅಮಾನ್ಯ ರುಜುವಾತುಗಳು. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
+      }
+    };
+
+    function changeLanguage() {
+      const lang = document.getElementById("languageSelect").value;
+      const t = translations[lang];
+      document.getElementById("title").textContent = t.title;
+      document.getElementById("nameLabel").textContent = t.nameLabel;
+      document.getElementById("passwordLabel").textContent = t.passwordLabel;
+      document.getElementById("loginButton").textContent = t.loginButton;
+
+      // Update placeholders dynamically
+      document.getElementById("name").placeholder = t.nameLabel.replace(":", "");
+      document.getElementById("securityCode").placeholder = t.passwordLabel.replace(":", "");
+    }
+
+    const predefinedSellerCredentials = {
+      name: "Chaitanya",
+      securityCode: "0000",
+    };
+
+    document.getElementById("pesticide-seller-login-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const lang = document.getElementById("languageSelect").value;
+      const t = translations[lang];
+      const name = document.getElementById("name").value;
+      const securityCode = document.getElementById("securityCode").value;
+
+      if (
+        name === predefinedSellerCredentials.name &&
+        securityCode === predefinedSellerCredentials.securityCode
+      ) {
+        alert(t.successMessage);
+        window.location.href = "pesticide_seller_input.html";
+      } else {
+        alert(t.errorMessage);
+      }
+    });
+
+    // Set default language to English
+    changeLanguage();
+  </script>
+</body>
+</html>

@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-key="title">Product Traceability</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url(https://cdn.wallpapersafari.com/47/23/JhH160.jpg);
+    }
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 95%;
+      border-radius: 5px;
+      background-color: rgba(6, 6, 6, 0.306);
+      color: rgb(19, 18, 18);
+      display: flex;
+      font-weight: bold;
+      justify-content: space-between;
+      align-items: center;
+      padding: 9px 40px;
+      z-index: 1000;
+    }
+    p{
+      
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      font-size: 21px;
+      margin-right: 50px;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+      align-items: flex-end;
+    }
+    .nav-links li {
+      display: inline;
+    }
+    .nav-links a {
+      color: rgb(255, 249, 249);
+      text-decoration: none;
+      font-size: 20px;
+      transition: color 0.3s ease;
+    }
+    .nav-links a:hover {
+      color: #ff9800;
+    }
+    .main-container {
+      display: flex;
+      background-image: url(https://cdn.wallpapersafari.com/47/23/JhH160.jpg);
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-top: 10px;
+      
+      
+    }
+    .image-slider {
+      width: 74%;
+      height: 660px;
+      margin-top: 55px;
+      overflow: hidden;
+      position: relative;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .image-slider img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .image-slider img.active {
+      opacity: 1;
+    }
+    .box-container {
+      width: 25%;
+      display: flex;
+      flex-direction: column;
+      margin-top: 30px;
+      gap: 4px;
+    }
+    .box {
+      position: relative;
+      width: 80%;
+      height: 185px;
+      margin-top: 40px;
+      display: flex udało;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      border: 4px solid transparent;
+      background-clip: padding-box;
+      background-image: linear-gradient(white, white),
+                        linear-gradient(60deg, hsl(224, 85%, 66%), hsl(269, 85%, 66%), hsl(314, 85%, 66%), hsl(359, 85%, 66%), hsl(44, 85%, 66%), hsl(89, 85%, 66%), hsl(134, 85%, 66%), hsl(179, 85%, 66%));
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+    }
+    .box:hover {
+      transform: translateY(-10px);
+    }
+    .box img {
+      width: 90px;
+      height: 90px;
+      margin-left:90px;
+      border-radius: 10px;
+      margin-top: 30px;
+    }
+    .box button {
+      margin-left : 32px;
+      padding: 11px;
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+      border: none;
+      margin-top: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      width: 80%;
+      text-transform: uppercase;
+    }
+    .box button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      background: linear-gradient(to bottom right, #ff9800, #f57c00);
+    }
+    .box:nth-child(1) button {
+      background: linear-gradient(to bottom right, #34eb40, #0f9d0f);
+    }
+    .box:nth-child(2) button {
+      background: linear-gradient(to bottom right, #34eb40, #0f9d0f);
+    }
+    .box:nth-child(3) button {
+      background: linear-gradient(to bottom right, #34eb40, #0f9d0f);
+    }
+    .image-slider .text-overlay {
+      position: absolute;
+      top: 25%;
+      padding: 30px;
+      line-gap-override: 20px;
+      left: 40%;
+      transform: translate(-50%, -50%);
+      font-family: tektur;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .image-slider .text-overlay.active {
+      opacity: 1;
+    }
+    .about {
+      padding: 50px 20px;
+      background-image: url(https://cdn.wallpapersafari.com/47/23/JhH160.jpg);
+      text-align: center;
+    }
+    .about h2 {
+      color: #4CAF50;
+      font-size: 38px;
+      margin-bottom: 30px;
+    }
+    .about p {
+      font-size: 21px;
+      color: #fdfafa;
+      max-width: 1100px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+  .contributors {
+  text-align: center;
+  padding: 20px;
+  background-image: url(https://cdn.wallpapersafari.com/47/23/JhH160.jpg);
+  position: relative;
+  overflow: hidden;
+ 
+}
+
+.contributors h2 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: #ff891a;
+}
+
+.team {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 70px;
+  margin-bottom: 0px;
+ 
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 250px;
+  opacity: 0;
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+  margin-bottom:0px;
+}
+
+.member.left {
+  transform: translateX(-100%);
+}
+
+.member.right {
+  transform: translateX(100%);
+}
+
+.member.animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.member .image {
+  width: 80px;
+  height: 190px;
+  border-radius: 10px;
+  margin-top: 20px;
+  
+  border: 2px solid;
+  z-index: 2;
+}
+
+.member img {
+  width: 180px;
+  height: 200px;
+  border-radius: 10px;
+  
+  
+  
+  object-fit: cover;
+  border: 3px solid #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.member img::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: linear-gradient(45deg, #00ffcc, #ff00cc, #00ffcc);
+  border-radius: 15px;
+  z-index: 3;
+  animation: rotateGradient 3s linear infinite;
+}
+
+@keyframes rotateGradient {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.member h3 {
+  font-size: 24px;
+  color: #fff;
+  margin-bottom: 5px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: bolder;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.member p {
+  font-size: 19px;
+  color: #fff;
+  margin-left: 35px;
+  font-weight: bold;
+  
+  margin-top: 2px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+    footer {
+      background-color: #9c9c9c53;
+      color: white;
+      padding: 45px 0;
+      text-align: center;
+    }
+    .footer-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .footer-section {
+      width: 25%;
+      min-width: 200px;
+    }
+    .footer-section h3 {
+      color: #f4b400;
+      font-size: 20px;
+    }
+    .footer-section p,
+    .footer-section ul {
+      color: #dcdcdc;
+      font-size: 16px;
+      padding: 4px;
+    }
+    .footer-section ul {
+      list-style: none;
+      padding: 0;
+    }
+    .footer-section ul li {
+      margin: 8px 0;
+    }
+    .footer-section ul li a {
+      color: #dcdcdc;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .footer-section ul li a:hover {
+      color: #f4b400;
+    }
+    .social-icons {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+    }
+    .social-icons img {
+      width: 30px;
+      height: 30px;
+      transition: 0.3s;
+    }
+    .social-icons img:hover {
+      transform: scale(1.1);
+    }
+    .footer-bottom {
+      margin-top: 40px;
+      border-top: 1px solid #444;
+      font-weight: bold;
+      padding-top: 20px;
+      font-size: 24px;
+    }
+    .image {
+      margin-left: 260px;
+      border-radius: 10px;
+    }
+    .section {
+      display: none;
+    }
+    .section.active {
+      display: block;
+    }
+    body {
+      background: #222;
+    }
+    #leaves {
+      position: relative;
+      top: -50px;
+      width: 100%;
+      text-align: left;
+      z-index: 10;
+    }
+    #leaves i {
+      display: inline-block;
+      width: 200px;
+      height: 150px;
+      background: linear-gradient(to bottom right, #4bc314, #0da70d);
+      transform: skew(20deg);
+      border-radius: 5% 40% 70%;
+      box-shadow: inset 0px 0px 1px #222;
+      border: 1px solid #333;
+      z-index: 10;
+      -webkit-animation: falling 5s 0s infinite;
+      opacity: 0.7;
+    }
+    #leaves i:nth-of-type(2n) {
+      -webkit-animation: falling2 5s 0s infinite;
+    }
+    #leaves i:nth-of-type(3n) {
+      -webkit-animation: falling3 5s 0s infinite;
+    }
+    #leaves i:before {
+      position: absolute;
+      content: '';
+      top: 117px;
+      right: 9px;
+      height: 27px;
+      width: 32px;
+      transform: rotate(49deg);
+      border-radius: 0% 15% 15% 0%;
+      border-top: 1px solid #222;
+      border-bottom: 1px solid #222;
+      border-left: 0px solid #222;
+      border-right: 1px solid #222;
+      background: linear-gradient(to right, rgba(0,100,0,1), #005600);
+      z-index: 1;
+    }
+    #leaves i:after {
+      content: '';
+      height: 125px;
+      width: 10px;
+      background: linear-gradient(to right, rgba(0,0,0,.15), rgba(0,0,0,0));
+      display: block;
+      transform: rotate(125deg);
+      position: absolute;
+      left: 85px;
+      border-radius: 50%;
+    }
+    #leaves i:nth-of-type(n) {
+      height: 23px;
+      width: 30px;
+    }
+    #leaves i:nth-of-type(n):before {
+      width: 7px;
+      height: 5px;
+      top: 17px;
+      right: 1px;
+    }
+    #leaves i:nth-of-type(n):after {
+      width: 2px;
+      height: 17px;
+      left: 12px;
+      top: 0px;
+    }
+    #leaves i:nth-of-type(2n+1) {
+      height: 11px;
+      width: 16px;
+    }
+    #leaves i:nth-of-type(2n+1):before {
+      width: 4px;
+      height: 3px;
+      top: 7px;
+      right: 0px;
+    }
+    #leaves i:nth-of-type(2n+1):after {
+      width: 2px;
+      height: 6px;
+      left: 5px;
+      top: 1px;
+    }
+    #leaves i:nth-of-type(3n+2) {
+      height: 17px;
+      width: 23px;
+    }
+    #leaves i:nth-of-type(3n+2):before {
+      height: 4px;
+      width: 4px;
+      top: 12px;
+      right: 1px;
+    }
+    #leaves i:nth-of-type(3n+2):after {
+      height: 10px;
+      width: 2px;
+      top: 1px;
+      left: 8px;
+    }
+    #leaves i:nth-of-type(n) {
+      -webkit-animation-delay: 1.9s;
+    }
+    #leaves i:nth-of-type(2n) {
+      -webkit-animation-delay: 3.9s;
+    }
+    #leaves i:nth-of-type(3n) {
+      -webkit-animation-delay: 2.3s;
+    }
+    #leaves i:nth-of-type(4n) {
+      -webkit-animation-delay: 4.4s;
+    }
+    #leaves i:nth-of-type(5n) {
+      -webkit-animation-delay: 5s;
+    }
+    #leaves i:nth-of-type(6n) {
+      -webkit-animation-delay: 3.5s;
+    }
+    #leaves i:nth-of-type(7n) {
+      -webkit-animation-delay: 2.8s;
+    }
+    #leaves i:nth-of-type(8n) {
+      -webkit-animation-delay: 1.5s;
+    }
+    #leaves i:nth-of-type(9n) {
+      -webkit-animation-delay: 3.3s;
+    }
+    #leaves i:nth-of-type(10n) {
+      -webkit-animation-delay: 2.5s;
+    }
+    #leaves i:nth-of-type(11n) {
+      -webkit-animation-delay: 1.2s;
+    }
+    #leaves i:nth-of-type(12n) {
+      -webkit-animation-delay: 4.1s;
+    }
+    #leaves i:nth-of-type(13n) {
+      -webkit-animation-delay: 1s;
+    }
+    #leaves i:nth-of-type(14n) {
+      -webkit-animation-delay: 4.7s;
+    }
+    #leaves i:nth-of-type(15n) {
+      -webkit-animation-delay: 3s;
+    }
+    #leaves i:nth-of-type(n) {
+      background: linear-gradient(to bottom right, #309900, #005600);
+    }
+    #leaves i:nth-of-type(2n+2) {
+      background: linear-gradient(to bottom right, #5e9900, #2b5600);
+    }
+    #leaves i:nth-of-type(4n+1) {
+      background: linear-gradient(to bottom right, #990, #564500);
+    }
+    #leaves i:nth-of-type(n) {
+      opacity: .7;
+    }
+    #leaves i:nth-of-type(3n+1) {
+      opacity: .5;
+    }
+    #leaves i:nth-of-type(3n+2) {
+      opacity: .3;
+    }
+    #leaves i:nth-of-type(n) {
+      transform: rotate(180deg);
+    }
+    #leaves i:nth-of-type(n) {
+      -webkit-animation-timing-function: ease-in-out;
+    }
+    @-webkit-keyframes falling {
+      0% {
+        -webkit-transform: translate3d(300px, 0, 0) rotate(0deg);
+        opacity: 0.7;
+      }
+      100% {
+        -webkit-transform: translate3d(-350px, 700px, 0) rotate(90deg);
+        opacity: 0;
+      }
+    }
+    @-webkit-keyframes falling3 {
+      0% {
+        -webkit-transform: translate3d(0, 0, 0) rotate(-20deg);
+        opacity: 0.7;
+      }
+      100% {
+        -webkit-transform: translate3d(-230px, 640px, 0) rotate(-70deg);
+        opacity: 0;
+      }
+    }
+    @-webkit-keyframes falling2 {
+      0% {
+        -webkit-transform: translate3d(0, 0, 0) rotate(90deg);
+        opacity: 0.7;
+      }
+      100% {
+        -webkit-transform: translate3d(-400px, 680px, 0) rotate(0deg);
+        opacity: 0;
+      }
+    }
+    .lang-switcher {
+      position: fixed;
+      top: 70px;
+      left: 10px;
+      z-index: 1001;
+    }
+    .lang-switcher button {
+      margin: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+      margin-top:15px;
+      border-radius:15px;
+      display:flex;
+    }
+    .lang-switcher button.active {
+      background: #007bff;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="lang-switcher">
+    <button data-lang="en">English</button>
+    <button data-lang="hi">हिन्दी</button>
+    <button data-lang="mr">मराठी</button>
+    <button data-lang="te">తెలుగు</button>
+    <button data-lang="ta">தமிழ்</button>
+    <button data-lang="kn">ಕನ್ನಡ</button>
+  </div>
+
+  <nav class="navbar">
+    <div class="logo">
+      <p>🌱Parakram</p>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#home" data-key="nav-home">Home</a></li>
+      <li><a href="#about" data-key="nav-about">About</a></li>
+      <li><a href="information.html" target="_blank" data-key="nav-learn">Learn</a></li>
+      <li><a href="https://ndap.niti.gov.in/catalogue?sectors=22&search=Variables%2CDatasetInfo&query=*&domain=ndap" target="_blank" data-key="nav-dataset">DataSet</a></li>
+      <li><a href="https://www.india.gov.in/topics/agriculture" target="_blank" data-key="nav-news">News</a></li>
+      <li><a href="#contributors" data-key="nav-contributors">Contributors</a></li>
+    </ul>
+  </nav>
+
+  <div id="leaves">
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i>
+    <i></i> 
+  </div>
+
+  <div class="section active" id="home">
+    <div class="main-container">
+      <div class="image-slider">
+        <img src="farm.jpg" alt="Farmers" class="active">
+        <div class="text-overlay active" data-key="slider1">From Farm to Fork: Ensuring Transparency in Every Bite</div>
+        <img src="food.jpg" alt="Harvesting">
+        <div class="text-overlay" data-key="slider2">Track Your Food: Know Where It Comes From</div>
+        <img src="cut.jpg" alt="Organic Farming">
+        <div class="text-overlay" data-key="slider3">Organic and Authentic: Trust in Every Step</div>
+      </div>
+      <div class="box-container">
+        <div class="box">
+          <a href="pesticide_seller.html">
+            <img src="pesd.jpg" alt="Pesticide Seller">
+          </a>
+          <button onclick="window.location.href='pesticide_seller.html'" data-key="box-pesticide">Fertilizer Seller</button>
+        </div>
+        <div class="box">
+          <a href="farmer.html">
+            <img src="farmeri.png" alt="Farmer">
+          </a>
+          <button onclick="window.location.href='farmer.html'" data-key="box-farmer">Farmer</button>
+        </div>
+        <div class="box">
+          <a href="distributor.html">
+            <img src="diss.jpg" alt="Distributor">
+          </a>
+          <button onclick="window.location.href='distributor.html'" data-key="box-distributor">Distributor</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about" id="about">
+    <h2 data-key="about-title">About Us</h2>
+    <p data-key="about-text">
+      Hey , We are Team Aarambh Redefining Trust in the Food Chain with Blockchain and Machine Learning Consumers often lack clarity about 
+      the origin and production of their food, leading to trust issues in the supply chain. 
+      Our project leverages blockchain technology to provide complete traceability, ensuring transparent and reliable information from farm to table.
+      ensuring full traceability of agricultural products, providing consumers with transparent insights into the origin, quality, and journey of their food 
+      while fostering trust and accountability across the supply chain.
+      The system allows farmers, suppliers, and companies to upload profiles and certifications while providing detailed insights into 
+      food origin, quality, and journey. This data is stored on an immutable blockchain ledger and accessed via QR codes on packaging, enabling consumers to instantly view essential information about their food.
+    </p>
+    <img src="farmer.drawio.jpg" alt="system_image" style="width:1000px; height: 300px; margin-top: 40px; border-radius: 30px;">
+  </div>
+
+  <div class="contributors" id="contributors">
+    <h2 data-key="contributors-title">Our Team</h2>
+    <div class="team">
+      <div class="member left">
+        <img src="chaitanya.png" alt="profile" style="width: 180px; height: 200px; border-radius: 10px;">
+        <h3>Chaitanya Patil</h3>
+        <p data-key="role-blockchain">Blockchain & Web3</p>
+      </div>
+      <div class="member right">
+        <img src="kunal.png.jpg" alt="profile" style="width: 180px; height: 200px; border-radius: 10px;">
+        <h3>Kunal Pawar</h3>
+        <p data-key="role-web">Web Developer</p>
+      </div>
+      <div class="member left">
+        <img src="rajat.jpg" alt="profile" style="width: 180px; height: 200px; border-radius: 10px;">
+        <h3>Rajat Chaudhari</h3>
+        <p data-key="role-ai">AI & ML</p>
+      </div>
+      <!-- New row for the remaining two members -->
+      <div class="member left">
+        <img src="parag.jpg" alt="profile" style="width: 180px; height: 200px; border-radius: 10px;">
+        <h3>Parag Patil</h3>
+        <p data-key="role">AI</p>
+      </div>
+      <div class="member right">
+        <img src="kartik.jpg" alt="profile" style="width: 180px; height: 200px; border-radius: 10px;">
+        <h3>Kartik Pangavhane</h3>
+        <p data-key="role-web">Web Developer</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3 data-key="footer-title">🌱 Food Traceability System</h3>
+        <p data-key="footer-subtitle">Ensuring transparency and authenticity in organic food.</p>
+      </div>
+      <div class="footer-section">
+        <h3 data-key="footer-contact">Contact Us</h3>
+        <p>Email: <a href="mailto:patilchaitanya604@gmail.com">patilchaitanya604@gmail.com</a></p>
+        <p>Phone: 9173749573</p>
+      </div>
+      <div class="footer-section">
+        <h3 data-key="footer-follow">Follow Us</h3>
+        <div class="social-icons">
+          <a href="#"><img src="facebook.png" alt="Facebook"></a>
+          <a href="https://github.com/sai-pat"><img src="github.png" alt="GitHub"></a>
+          <a href="#"><img src="linkedin.png" alt="LinkedIn"></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p data-key="footer-bottom">© 2025 Food Traceability System | All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <audio id="tikSound">
+    <source src="buttonsound.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    const translations = {
+      en: {
+        title: "Product Traceability",
+        "nav-home": "Home",
+        "nav-about": "About",
+        "nav-learn": "Learn",
+        "nav-news": "News",
+        "nav-contributors": "Contributors",
+        slider1: "From Farm to Fork: Ensuring Transparency in Every Bite",
+        slider2: "Track Your Food: Know Where It Comes From",
+        slider3: "Organic and Authentic: Trust in Every Step",
+        "box-pesticide": "Pesticide Seller",
+        "box-farmer": "Farmer",
+        "box-distributor": "Distributor",
+        "about-title": "About Us",
+        "about-text": "Hey , We are Team Aarambh Redefining Trust in the Food Chain with Blockchain and Machine Learning Consumers often lack clarity about the origin and production of their food, leading to trust issues in the supply chain. Our project leverages blockchain technology to provide complete traceability, ensuring transparent and reliable information from farm to table. ensuring full traceability of agricultural products, providing consumers with transparent insights into the origin, quality, and journey of their food while fostering trust and accountability across the supply chain. The system allows farmers, suppliers, and companies to upload profiles and certifications while providing detailed insights into food origin, quality, and journey. This data is stored on an immutable blockchain ledger and accessed via QR codes on packaging, enabling consumers to instantly view essential information about their food.",
+        "contributors-title": "Our Team",
+        "role-blockchain": "Blockchain & Web3",
+        "role-web": "Web Developer",
+        "role-ai": "AI & ML",
+        "footer-title": "🌱 Food Traceability System",
+        "footer-subtitle": "Ensuring transparency and authenticity in organic food.",
+        "footer-contact": "Contact Us",
+        "footer-follow": "Follow Us",
+        "footer-bottom": "© 2025 Food Traceability System | All Rights Reserved"
+      },
+      hi: {
+        title: "उत्पाद ट्रेसबिलिटी",
+        "nav-home": "होम",
+        "nav-about": "हमारे बारे में",
+        "nav-learn": "सीखें",
+        "nav-news": "समाचार",
+        "nav-contributors": "योगदानकर्ता",
+        slider1: "खेत से थाली तक: हर काट में पारदर्शिता सुनिश्चित करना",
+        slider2: "अपने भोजन को ट्रैक करें: जानें यह कहां से आता है",
+        slider3: "जैविक और प्रामाणिक: हर कदम पर भरोसा",
+        "box-pesticide": "कीटनाशक विक्रेता",
+        "box-farmer": "किसान",
+        "box-distributor": "वितरक",
+        "about-title": "हमारे बारे में",
+        "about-text": "हाय, हम टीम आरंभ हैं, जो ब्लॉकचेन और मशीन लर्निंग के साथ खाद्य श्रृंखला में विश्वास को पुनर्परिभाषित कर रहे हैं। उपभोक्ताओं को अक्सर अपने भोजन की उत्पत्ति और उत्पादन के बारे में स्पष्टता की कमी होती है, जिसके कारण आपूर्ति श्रृंखला में विश्वास की समस्याएं उत्पन्न होती हैं। हमारा प्रोजेक्ट ब्लॉकचेन तकनीक का उपयोग करके पूर्ण ट्रेसबिलिटी प्रदान करता है, खेत से थाली तक पारदर्शी और विश्वसनीय जानकारी सुनिश्चित करता है। यह कृषि उत्पादों की पूर्ण ट्रेसबिलिटी सुनिश्चित करता है, उपभोक्ताओं को उनके भोजन की उत्पत्ति, गुणवत्ता और यात्रा के बारे में पारदर्शी जानकारी प्रदान करता है, साथ ही आपूर्ति श्रृंखला में विश्वास और जवाबदेही को बढ़ावा देता है। यह सिस्टम किसानों, आपूर्तिकर्ताओं और कंपनियों को प्रोफाइल और प्रमाणपत्र अपलोड करने की अनुमति देता है, साथ ही भोजन की उत्पत्ति, गुणवत्ता और यात्रा के बारे में विस्तृत जानकारी प्रदान करता है। यह डेटा एक अपरिवर्तनीय ब्लॉकचेन लेजर पर संग्रहीत होता है और पैकेजिंग पर क्यूआर कोड के माध्यम से एक्सेस किया जाता है, जिससे उपभोक्ता अपने भोजन के बारे में आवश्यक जानकारी तुरंत देख सकते हैं।",
+        "contributors-title": "हमारी टीम",
+        "role-blockchain": "ब्लॉकचेन और वेब3",
+        "role-web": "वेब डेवलपर",
+        "role-ai": "एआई और एमएल",
+        "footer-title": "🌱 खाद्य ट्रेसबिलिटी सिस्टम",
+        "footer-subtitle": "जैविक भोजन में पारदर्शिता और प्रामाणिकता सुनिश्चित करना।",
+        "footer-contact": "संपर्क करें",
+        "footer-follow": "हमें फॉलो करें",
+        "footer-bottom": "© 2025 खाद्य ट्रेसबिलिटी सिस्टम | सर्वाधिकार सुरक्षित"
+      },
+      mr: {
+        title: "उत्पाद ट्रेसबिलिटी",
+        "nav-home": "होम",
+        "nav-about": "आमच्याबद्दल",
+        "nav-learn": "शिका",
+        "nav-news": "बातम्या",
+        "nav-contributors": "योगदानकर्ते",
+        slider1: "शेतापासून थाळीपर्यंत: प्रत्येक चाव्यात पारदर्शिता सुनिश्चित करणे",
+        slider2: "आपल्या अन्नाचा मागोवा घ्या: ते कुठून येते ते जाणून घ्या",
+        slider3: "सेंद्रिय आणि खरे: प्रत्येक पावलावर विश्वास",
+        "box-pesticide": "कीटकनाशक विक्रेता",
+        "box-farmer": "शेतकरी",
+        "box-distributor": "वितरक",
+        "about-title": "आमच्याबद्दल",
+        "about-text": "हाय, आम्ही टीम आरंभ आहोत, ब्लॉकचेन आणि मशीन लर्निंगसह अन्न साखळीत विश्वास पुन्हा परिभाषित करत आहोत. ग्राहकांना त्यांच्या अन्नाच्या उत्पत्ती आणि उत्पादनाबद्दल स्पष्टतेची कमतरता असते, ज्यामुळे पुरवठा साखळीत विश्वासाच्या समस्या निर्माण होतात. आमचा प्रकल्प ब्लॉकचेन तंत्रज्ञानाचा वापर करून संपूर्ण ट्रेसबिलिटी प्रदान करतो, शेतापासून थाळीपर्यंत पारदर्शी आणि विश्वसनीय माहिती सुनिश्चित करतो. हे कृषी उत्पादनांचे संपूर्ण ट्रेसबिलिटी सुनिश्चित करते, ग्राहकांना त्यांच्या अन्नाच्या उत्पत्ती, गुणवत्ता आणि प्रवासाबद्दल पारदर्शी अंतर्दृष्टी प्रदान करते, तसेच पुरवठा साखळीत विश्वास आणि जबाबदारी वाढवते. ही प्रणाली शेतकरी, पुरवठादार आणि कंपन्यांना प्रोफाइल आणि प्रमाणपत्रे अपलोड करण्याची परवानगी देते, तसेच अन्नाच्या उत्पत्ती, गुणवत्ता आणि प्रवासाबद्दल तपशीलवार माहिती प्रदान करते. हा डेटा एक अपरिवर्तनीय ब्लॉकचेन लेजरवर संग्रहित केला जातो आणि पॅकेजिंगवरील क्यूआर कोडद्वारे प्रवेश केला जातो, ज्यामुळे ग्राहकांना त्यांच्या अन्नाबद्दल आवश्यक माहिती त्वरित पाहता येते.",
+        "contributors-title": "आमची टीम",
+        "role-blockchain": "ब्लॉकचेन आणि वेब3",
+        "role-web": "वेब डेव्हलपर",
+        "role-ai": "एआय आणि एमएल",
+        "footer-title": "🌱 अन्न ट्रेसबिलिटी सिस्टम",
+        "footer-subtitle": "सेंद्रिय अन्नात पारदर्शिता आणि खरेपणा सुनिश्चित करणे.",
+        "footer-contact": "संपर्क साधा",
+        "footer-follow": "आम्हाला फॉलो करा",
+        "footer-bottom": "© 2025 अन्न ट्रेसबिलिटी सिस्टम | सर्व हक्क राखीव"
+      },
+      te: {
+        title: "ఉత్పత్తి ట్రేసబిలిటీ",
+        "nav-home": "హోమ్",
+        "nav-about": "మా గురించి",
+        "nav-learn": "నేర్చుకోండి",
+        "nav-news": "వార్తలు",
+        "nav-contributors": "సహకారులు",
+        slider1: "పొలం నుండి పళ్ళెం వరకు: ప్రతి కాటులో పారదర్శకతను నిర్ధారించడం",
+        slider2: "మీ ఆహారాన్ని ట్రాక్ చేయండి: అది ఎక్కడ నుండి వస్తుందో తెలుసుకోండి",
+        slider3: "సేంద్రియ మరియు ప్రామాణికం: ప్రతి అడుగులో నమ్మకం",
+        "box-pesticide": "పురుగుమందుల విక్రేత",
+        "box-farmer": "రైతు",
+        "box-distributor": "డిస్ట్రిబ్యూటర్",
+        "about-title": "మా గురించి",
+        "about-text": "హాయ్, మేము టీమ్ ఆరంభ్, బ్లాక్‌చెయిన్ మరియు మెషిన్ లెర్నింగ్‌తో ఆహార గొలుసులో నమ్మకాన్ని పునర్నిర్వచనం చేస్తున్నాము. వినియోగదారులకు తమ ఆహారం యొక్క మూలం మరియు ఉత్పత్తి గురించి స్పష్టత లేకపోవడం వల్ల సరఫరా గొలుసులో నమ్మక సమస్యలు తలెత్తుతాయి. మా ప్రాజెక్ట్ బ్లాక్‌చెయిన్ టెక్నాలజీని ఉపయోగించి పూర్తి ట్రేసబిలిటీని అందిస్తుంది, పొలం నుండి పళ్ళెం వరకు పారదర్శక మరియు నమ్మకమైన సమాచారాన్ని నిర్ధారిస్తుంది. ఇది వ్యవసాయ ఉత్పత్తుల పూర్తి ట్రేసబిలిటీని నిర్ధారిస్తుంది, వినియోగదారులకు వారి ఆహారం యొక్క మూలం, నాణ్యత మరియు ప్రయాణం గురించి పారదర్శక అంతర్దృష్టులను అందిస్తుంది, అలాగే సరఫరా గొలుసులో నమ్మకం మరియు జవాబుదారీతనాన్ని పెంపొందిస్తుంది. ఈ వ్యవస్థ రైతులు, సరఫరాదారులు మరియు కంపెనీలు ప్రొఫైల్‌లు మరియు సర్టిఫికెట్‌లను అప్‌లోడ్ చేయడానికి అనుమతిస్తుంది, అలాగే ఆహారం యొక్క మూలం, నాణ్యత మరియు ప్రయాణం గురించి వివరణాత్మక అంతర్దృష్టులను అందిస్తుంది. ఈ డేటా ఒక అపరివర్తనీయ బ్లాక్‌చెయిన్ లెడ్జర్‌పై నిల్వ చేయబడుతుంది మరియు ప్యాకేజింగ్‌పై క్యూఆర్ కోడ్‌ల ద్వారా యాక్సెస్ చేయబడుతుంది, దీనివల్ల వినియోగదారులు తమ ఆహారం గురించి అవసరమైన సమాచారాన్ని తక్షణమే చూడగలరు.",
+        "contributors-title": "మా బృందం",
+        "role-blockchain": "బ్లాక్‌చెయిన్ & వెబ్3",
+        "role-web": "వెబ్ డెవలపర్",
+        "role-ai": "ఏఐ & ఎంఎల్",
+        "footer-title": "🌱 ఆహార ట్రేసబిలిటీ సిస్టమ్",
+        "footer-subtitle": "సేంద్రియ ఆహారంలో పారదర్శకత మరియు ప్రామాణికతను నిర్ధారించడం.",
+        "footer-contact": "మమ్మల్ని సంప్రదించండి",
+        "footer-follow": "మమ్మల్ని అనుసరించండి",
+        "footer-bottom": "© 2025 ఆహార ట్రేసబిలిటీ సిస్టమ్ | అన్ని హక్కులు రిజర్వ్ చేయబడ్డాయి"
+      },
+      ta: {
+        title: "தயாரிப்பு பின்தொடர்தல்",
+        "nav-home": "முகப்பு",
+        "nav-about": "எங்களைப் பற்றி",
+        "nav-learn": "கற்றுக்கொள்",
+        "nav-news": "செய்திகள்",
+        "nav-contributors": "பங்களிப்பாளர்கள்",
+        slider1: "பண்ணையிலிருந்து தட்டு வரை: ஒவ்வொரு கடியிலும் வெளிப்படைத்தன்மையை உறுதி செய்தல்",
+        slider2: "உங்கள் உணவைப் பின்தொடரவும்: அது எங்கிருந்து வருகிறது என்பதை அறியவும்",
+        slider3: "கரிம மற்றும் உண்மையானது: ஒவ்வொரு படியிலும் நம்பிக்கை",
+        "box-pesticide": "பூச்சிக்கொல்லி விற்பனையாளர்",
+        "box-farmer": "விவசாயி",
+        "box-distributor": "விநியோகஸ்தர்",
+        "about-title": "எங்களைப் பற்றி",
+        "about-text": "ஹாய், நாங்கள் டீம் ஆரம்ப், பிளாக்செயின் மற்றும் மெஷின் லேர்னிங் மூலம் உணவு சங்கிலியில் நம்பிக்கையை மறுவரையறை செய்கிறோம். பயனர்களுக்கு அவர்களின் உணவின் தோற்றம் மற்றும் உற்பத்தி பற்றிய தெளிவு இல்லாததால், விநியோக சங்கிலியில் நம்பிக்கை சிக்கல்கள் ஏற்படுகின்றன. எங்கள் திட்டம் பிளாக்செயின் தொழில்நுட்பத்தைப் பயன்படுத்தி முழுமையான பின்தொடர்தலை வழங்குகிறது, பண்ணையிலிருந்து தட்டு வரை வெளிப்படையான மற்றும் நம்பகமான தகவலை உறுதி செய்கிறது. இது விவசாய பொருட்களின் முழு பின்தொடர்தலை உறுதி செய்கிறது, பயனர்களுக்கு அவர்களின் உணவின் தோற்றம், தரம் மற்றும் பயணம் பற்றிய வெளிப்படையான நுண்ணறிவுகளை வழங்குகிறது, அதே சமயம் விநியோக சங்கிலியில் நம்பிக்கை மற்றும் பொறுப்புணர்வை வளர்க்கிறது. இந்த அமைப்பு விவசாயிகள், சப்ளையர்கள் மற்றும் நிறுவனங்களுக்கு சுயவிவரங்கள் மற்றும் சான்றிதழ்களை பதிவேற்ற அனுமதிக்கிறது, அதே சமயம் உணவின் தோற்றம், தரம் மற்றும் பயணம் பற்றிய விரிவான நுண்ணறிவுகளை வழங்குகிறது. இந்த தரவு ஒரு மாற்ற முடியாத பிளாக்செயின் பதிவேட்டில் சேமிக்கப்படுகிறது மற்றும் பேக்கேஜிங்கில் உள்ள QR கோடுகள் மூலம் அணுகப்படுகிறது, இதனால் பயனர்கள் தங்கள் உணவு பற்றிய அத்தியாவசிய தகவல்களை உடனடியாக பார்க்க முடியும்.",
+        "contributors-title": "எங்கள் குழு",
+        "role-blockchain": "பிளாக்செயின் & வெப்3",
+        "role-web": "வலை உருவாக்குபவர்",
+        "role-ai": "ஏஐ & எம்எல்",
+        "footer-title": "🌱 உணவு பின்தொடர்தல் அமைப்பு",
+        "footer-subtitle": "கரிம உணவில் வெளிப்படைத்தன்மை மற்றும் உண்மையான தன்மையை உறுதி செய்தல்.",
+        "footer-contact": "எங்களை தொடர்பு கொள்ளுங்கள்",
+        "footer-follow": "எங்களை பின்தொடரவும்",
+        "footer-bottom": "© 2025 உணவு பின்தொடர்தல் அமைப்பு | அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை"
+      },
+      kn: {
+        title: "ಉತ್ಪನ್ನ ಟ್ರೇಸಬಿಲಿಟಿ",
+        "nav-home": "ಮುಖಪುಟ",
+        "nav-about": "ನಮ್ಮ ಬಗ್ಗೆ",
+        "nav-learn": "ಕಲಿಯಿರಿ",
+        "nav-news": "ಸುದ್ದಿಗಳು",
+        "nav-contributors": "ಸಹಯೋಗಿಗಳು",
+        slider1: "ಕೃಷಿಯಿಂದ ತಟ್ಟೆಗೆ: ಪ್ರತಿ ಬೈಟ್‌ನಲ್ಲಿ ಪಾರದರ್ಶಕತೆಯನ್ನು ಖಚಿತಪಡಿಸುವುದು",
+        slider2: "ನಿಮ್ಮ ಆಹಾರವನ್ನು ಟ್ರ್ಯಾಕ್ ಮಾಡಿ: ಅದು ಎಲ್ಲಿಂದ ಬರುತ್ತದೆ ಎಂದು ತಿಳಿಯಿರಿ",
+        slider3: "ಸಾವಯವ ಮತ್ತು ಸತ್ಯ: ಪ್ರತಿ ಹೆಜ್ಜೆಯಲ್ಲಿ ವಿಶ್ವಾಸ",
+        "box-pesticide": "ಕೀಟನಾಶಕ ಮಾರಾಟಗಾರ",
+        "box-farmer": "ರೈತ",
+        "box-distributor": "ವಿತರಕ",
+        "about-title": "ನಮ್ಮ ಬಗ್ಗೆ",
+        "about-text": "ಹಾಯ್, ನಾವು ಟೀಮ್ ಆರಂಭ್, ಬ್ಲಾಕ್‌ಚೇನ್ ಮತ್ತು ಮೆಷಿನ್ ಲರ್ನಿಂಗ್‌ನೊಂದಿಗೆ ಆಹಾರ ಸರಪಳಿಯಲ್ಲಿ ವಿಶ್ವಾಸವನ್ನು ಮರುವ್ಯಾಖ್ಯಾನಿಸುತ್ತಿದ್ದೇವೆ. ಗ್ರಾಹಕರಿಗೆ ತಮ್ಮ ಆಹಾರದ ಮೂಲ ಮತ್ತು ಉತ್ಪಾದನೆಯ ಬಗ್ಗೆ ಸ್ಪಷ್ಟತೆ ಇಲ್ಲದಿರುವುದರಿಂದ ಪೂರೈಕೆ ಸರಪಳಿಯಲ್ಲಿ ವಿಶ್ವಾಸದ ಸಮಸ್ಯೆಗಳು ಉದ್ಭವಿಸುತ್ತವೆ. ನಮ್ಮ ಯೋಜನೆ ಬ್ಲಾಕ್‌ಚೇನ್ ತಂತ್ರಜ್ಞಾನವನ್ನು ಬಳಸಿಕೊಂಡು ಸಂಪೂರ್ಣ ಟ್ರೇಸಬಿಲಿಟಿಯನ್ನು ಒದಗಿಸುತ್ತದೆ, ಕೃಷಿಯಿಂದ ತಟ್ಟೆಗೆ ಪಾರದರ್ಶಕ ಮತ್ತು ವಿಶ್ವಾಸಾರ್ಹ ಮಾಹಿತಿಯನ್ನು ಖಚಿತಪಡಿಸುತ್ತದೆ. ಇದು ಕೃಷಿ ಉತ್ಪನ್ನಗಳ ಸಂಪೂರ್ಣ ಟ್ರೇಸಬಿಲಿಟಿಯನ್ನು ಖಚಿತಪಡಿಸುತ್ತದೆ, ಗ್ರಾಹಕರಿಗೆ ತಮ್ಮ ಆಹಾರದ ಮೂಲ, ಗುಣಮಟ್ಟ ಮತ್ತು ಪ್ರಯಾಣದ ಬಗ್ಗೆ ಪಾರದರ್ಶಕ ಒಳನೋಟಗಳನ್ನು ಒದಗಿಸುತ್ತದೆ, ಜೊತೆಗೆ ಪೂರೈಕೆ ಸರಪಳಿಯಲ್ಲಿ ವಿಶ್ವಾಸ ಮತ್ತು ಜವಾಬ್ದಾರಿಯನ್ನು ಬೆಳೆಸುತ್ತದೆ. ಈ ವ್ಯವಸ್ಥೆ ರೈತರು, ಪೂರೈಕೆದಾರರು ಮತ್ತು ಕಂಪನಿಗಳಿಗೆ ಪ್ರೊಫೈಲ್‌ಗಳು ಮತ್ತು ಪ್ರಮಾಣಪತ್ರಗಳನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಲು ಅವಕಾಶ ನೀಡುತ್ತದೆ, ಜೊತೆಗೆ ಆಹಾರದ ಮೂಲ, ಗುಣಮಟ್ಟ ಮತ್ತು ಪ್ರಯಾಣದ ಬಗ್ಗೆ ವಿವರವಾದ ಒಳನೋಟಗಳನ್ನು ಒದಗಿಸುತ್ತದೆ. ಈ ಡೇಟಾವನ್ನು ಒಂದು ಬದಲಾಯಿಸಲಾಗದ ಬ್ಲಾಕ್‌ಚೇನ್ ಲೆಡ್ಜರ್‌ನಲ್ಲಿ ಸಂಗ್ರಹಿಸಲಾಗುತ್ತದೆ ಮತ್ತು ಪ್ಯಾಕೇಜಿಂಗ್‌ನ ಮೇಲಿನ QR ಕೋಡ್‌ಗಳ ಮೂಲಕ ಪ್ರವೇಶಿಸಲಾಗುತ್ತದೆ, ಇದರಿಂದ ಗ್ರಾಹಕರು ತಮ್ಮ ಆಹಾರದ ಬಗ್ಗೆ ಅಗತ್ಯ ಮಾಹಿತಿಯನ್ನು ತಕ್ಷಣವೇ ನೋಡಬಹುದು.",
+        "contributors-title": "ನಮ್ಮ ತಂಡ",
+        "role-blockchain": "ಬ್ಲಾಕ್‌ಚೇನ್ & ವೆಬ್3",
+        "role-web": "ವೆಬ್ ಡೆವಲಪರ್",
+        "role-ai": "ಎಐ & ಎಂಎಲ್",
+        "footer-title": "🌱 ಆಹಾರ ಟ್ರೇಸಬಿಲಿಟಿ ಸಿಸ್ಟಮ್",
+        "footer-subtitle": "ಸಾವಯವ ಆಹಾರದಲ್ಲಿ ಪಾರದರ್ಶಕತೆ ಮತ್ತು ಸತ್ಯತೆಯನ್ನು ಖಚಿತಪಡಿಸುವುದು.",
+        "footer-contact": "ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ",
+        "footer-follow": "ನಮ್ಮನ್ನು ಅನುಸರಿಸಿ",
+        "footer-bottom": "© 2025 ಆಹಾರ ಟ್ರೇಸಬಿಲಿಟಿ ಸಿಸ್ಟಮ್ | ಎಲ್ಲಾ ಹಕ್ಕುಗಳು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ"
+      }
+    };
+
+    function setLanguage(lang) {
+      document.querySelectorAll('[data-key]').forEach(element => {
+        const key = element.getAttribute('data-key');
+        if (translations[lang][key]) {
+          element.textContent = translations[lang][key];
+        }
+      });
+      document.querySelectorAll('.lang-switcher button').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+      });
+      document.documentElement.lang = lang;
+    }
+
+    document.querySelectorAll('.lang-switcher button').forEach(button => {
+      button.addEventListener('click', () => setLanguage(button.getAttribute('data-lang')));
+    });
+
+    setLanguage('en');
+
+    const audio = document.getElementById('tikSound');
+    let userInteracted = false;
+
+    function playSound() {
+      if (userInteracted) {
+        audio.play();
+      }
+    }
+
+    function stopSound() {
+      if (userInteracted) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    }
+
+    document.addEventListener('click', () => {
+      if (!userInteracted) {
+        userInteracted = true;
+        console.log('User interacted with the page. Hover sound enabled.');
+      }
+    });
+
+    const buttons = document.querySelectorAll('.box button');
+    buttons.forEach(button => {
+      button.addEventListener('mouseenter', playSound);
+      button.addEventListener('mouseleave', stopSound);
+    });
+
+    const images = document.querySelectorAll('.image-slider img');
+    const textOverlays = document.querySelectorAll('.image-slider .text-overlay');
+    let currentImage = 0;
+
+    setInterval(() => {
+      images[currentImage].classList.remove('active');
+      textOverlays[currentImage].classList.remove('active');
+      currentImage = (currentImage + 1) % images.length;
+      images[currentImage].classList.add('active');
+      textOverlays[currentImage].classList.add('active');
+    }, 3000);
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const members = document.querySelectorAll(".member");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+              setTimeout(() => {
+                entry.target.classList.add("animate");
+              }, index * 500);
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+      members.forEach((member) => {
+        observer.observe(member);
+      });
+    });
+  </script>
+</body>
+</html>

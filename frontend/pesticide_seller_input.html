@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fertilizer Seller Input</title>
+  <link rel="stylesheet" href="styles1.css">
+</head> 
+<body>
+  <div class="container">
+    <!-- Language Selection Buttons -->
+    <div class="language-buttons">
+      <button onclick="translatePage('en')">English</button>
+      <button onclick="translatePage('hi')">हिंदी</button>
+      <button onclick="translatePage('mr')">मराठी</button>
+      <button onclick="translatePage('te')">తెలుగు</button>
+      <button onclick="translatePage('ta')">தமிழ்</button>
+      <button onclick="translatePage('kn')">ಕನ್ನಡ</button>
+    </div>
+
+    <h1 data-translate="pesticide_seller_data">Fertilizer Seller Data</h1>
+    <form id="pesticide-seller-input-form">
+      <!-- Farmer's Name and Aadhar Number -->
+      <label for="farmerName" data-translate="farmer_name">Farmer's Name:</label>
+      <input type="text" id="farmerName" name="farmerName" placeholder="Enter Farmer Name" required />
+
+      <label for="aadharNumber" data-translate="aadhar_number">Aadhar Number:</label>
+      <input type="text" id="aadharNumber" name="aadharNumber" placeholder="Enter Aadhar Number" required />
+
+      <!-- Step 1: Select Multiple Crop Yield Types -->
+      <label for="yieldType" data-translate="select_crop_yield_type">Select Crop Yield Type:</label>
+      <select id="yieldType" name="yieldType" multiple required>
+        <option value="Apple">Apple</option>
+        <option value="Rice">Rice</option>
+        <option value="Wheat">Wheat</option>
+        <option value="Sugarcane">Sugarcane</option>
+        <option value="Banana">Banana</option>
+      </select>
+
+      <div id="yieldQuantityContainer"></div>
+
+      <!-- Step 2: Select Pesticide Type (Dynamically Populated) -->
+      <label for="pesticideType" data-translate="select_pesticide_type">Select Fertilizer Type:</label>
+      <select id="pesticideType" name="pesticideType" multiple required>
+        <!-- Pesticide options will be populated dynamically -->
+      </select>
+
+      <div id="pesticideQuantityContainer"></div>
+
+      <button type="submit" data-translate="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    // Translation dictionary
+    const translations = {
+      en: {
+        pesticide_seller_data: "Pesticide Seller Data",
+        farmer_name: "Farmer's Name:",
+        aadhar_number: "Aadhar Number:",
+        select_crop_yield_type: "Select Crop Yield Type:",
+        select_pesticide_type: "Select Pesticide Type:",
+        submit: "Submit"
+      },
+      hi: {
+        pesticide_seller_data: "उर्वरक विक्रेता डेटा",
+        farmer_name: "किसान का नाम:",
+        aadhar_number: "आधार नंबर:",
+        select_crop_yield_type: "फसल उपज प्रकार चुनें:",
+        select_pesticide_type: "उर्वरक प्रकार चुनें:",
+        submit: "जमा करें"
+      },
+      mr: {
+        pesticide_seller_data: " खत विक्रेता डेटा",
+        farmer_name: "शेतकऱ्याचे नाव:",
+        aadhar_number: "आधार क्रमांक:",
+        select_crop_yield_type: "पीक उत्पन्न प्रकार निवडा:",
+        select_pesticide_type: ": खत प्रकार निवडा:",
+        submit: "सबमिट करा"
+      },
+      te: {
+        pesticide_seller_data: "ఎరువు విక్రేత డేటా",
+        farmer_name: "రైతు పేరు:",
+        aadhar_number: "ఆధార్ నంబర్:",
+        select_crop_yield_type: "పంట దిగుబడి రకాన్ని ఎంచుకోండి:",
+        select_pesticide_type: "ఎరువు రకాన్ని ఎంచుకోండి:",
+        submit: "సమర్పించండి"
+      },
+      ta: {
+        pesticide_seller_data: "சர்க்கரை விற்பனையாளர் தரவு",
+        farmer_name: "விவசாயியின் பெயர்:",
+        aadhar_number: "ஆதார் எண்:",
+        select_crop_yield_type: "பயிர் மகசூல் வகையைத் தேர்ந்தெடுக்கவும்:",
+        select_pesticide_type: "சர்க்கரை வகையைத் தேர்ந்தெடுக்கவும்:",
+        submit: "சமர்ப்பிக்கவும்"
+      },
+      kn: {
+        pesticide_seller_data: "ಹುಲ್ಲು ವಿಕ್ರೇತ ಡೇಟಾ",
+        farmer_name: "ರೈತರ ಹೆಸರು:",
+        aadhar_number: "ಆಧಾರ್ ಸಂಖ್ಯೆ:",
+        select_crop_yield_type: "ಬೆಳೆ ಇಳುವರಿ ಪ್ರಕಾರವನ್ನು ಆಯ್ಕೆಮಾಡಿ:",
+        select_pesticide_type: "ಹುಲ್ಲು ಪ್ರಕಾರವನ್ನು ಆಯ್ಕೆಮಾಡಿ:",
+        submit: "ಸಲ್ಲಿಸು"
+      }
+    };
+
+    // Function to translate the page
+    function translatePage(language) {
+      const elements = document.querySelectorAll('[data-translate]');
+      elements.forEach(element => {
+        const key = element.getAttribute('data-translate');
+        element.textContent = translations[language][key];
+      });
+    }
+
+    // Rest of your existing JavaScript code...
+    document.addEventListener('DOMContentLoaded', () => {
+      // Mapping of crop yield types to their respective pesticides
+      const cropToPesticides = {
+        Apple: ["Compost", "Bone Meal", "Seaweed Extract"],
+Rice: ["Fish Meal", "Blood Meal", "Kelp Meal"],
+Wheat: ["Compost", "Cottonseed Meal", "Dolomitic Lime"],
+Sugarcane: ["Fish Emulsion", "Manure", "Rock Phosphate"],
+Banana: ["Compost", "Bat Guano", "Worm Castings"],
+      };
+
+      // Function to update pesticide options based on selected crops
+      function updatePesticideOptions() {
+        const selectedCrops = Array.from(document.getElementById('yieldType').selectedOptions).map(opt => opt.value);
+        const pesticideTypeSelect = document.getElementById('pesticideType');
+        const pesticideQuantityContainer = document.getElementById('pesticideQuantityContainer');
+
+        pesticideTypeSelect.innerHTML = ''; // Clear existing options
+        pesticideQuantityContainer.innerHTML = ''; // Clear existing quantity fields
+
+        let pesticideSet = new Set();
+        selectedCrops.forEach(crop => {
+          cropToPesticides[crop].forEach(pesticide => pesticideSet.add(pesticide));
+        });
+
+        pesticideSet.forEach(pesticide => {
+          const option = document.createElement('option');
+          option.value = pesticide;
+          option.textContent = pesticide;
+          pesticideTypeSelect.appendChild(option);
+        });
+      }
+
+      // Function to render input fields for selected crops
+      function renderCropQuantityFields() {
+        const selectedCrops = Array.from(document.getElementById('yieldType').selectedOptions).map(opt => opt.value);
+        const yieldQuantityContainer = document.getElementById('yieldQuantityContainer');
+
+        yieldQuantityContainer.innerHTML = ''; // Clear existing fields
+
+        selectedCrops.forEach(crop => {
+          const div = document.createElement('div');
+          div.innerHTML = `
+            <label for="quantity-${crop}">Quantity for ${crop} seeds (kg):</label>
+            <input type="number" id="quantity-${crop}" name="quantity-${crop}" required>
+          `;
+          yieldQuantityContainer.appendChild(div);
+        });
+
+        updatePesticideOptions(); // Update pesticide options dynamically
+      }
+
+      // Function to render input fields for pesticide quantity
+      function renderPesticideQuantityFields() {
+        const selectedPesticides = Array.from(document.getElementById('pesticideType').selectedOptions).map(opt => opt.value);
+        const pesticideQuantityContainer = document.getElementById('pesticideQuantityContainer');
+
+        pesticideQuantityContainer.innerHTML = ''; // Clear existing fields
+
+        selectedPesticides.forEach(pesticide => {
+          const div = document.createElement('div');
+          div.innerHTML = `
+            <label for="quantity-${pesticide}">Quantity for ${pesticide} (liters):</label>
+            <input type="number" id="quantity-${pesticide}" name="quantity-${pesticide}" required>
+          `;
+          pesticideQuantityContainer.appendChild(div);
+        });
+      }
+
+      // Event Listeners
+      document.getElementById('yieldType').addEventListener('change', renderCropQuantityFields);
+      document.getElementById('pesticideType').addEventListener('change', renderPesticideQuantityFields);
+
+      // Trigger on page load to populate initial options
+      renderCropQuantityFields();
+
+      document.getElementById('pesticide-seller-input-form').addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const selectedCrops = Array.from(document.getElementById('yieldType').selectedOptions).map(opt => opt.value);
+        const selectedPesticides = Array.from(document.getElementById('pesticideType').selectedOptions).map(opt => opt.value);
+
+        const pesticideSellerData = {
+          farmerName: document.getElementById('farmerName').value,
+          aadharNumber: document.getElementById('aadharNumber').value,
+          
+          data: {
+            crops: selectedCrops.map(crop => ({
+              name: crop,
+              quantity: document.getElementById(`quantity-${crop}`).value
+            })),
+            pesticides: selectedPesticides.map(pesticide => ({
+              name: pesticide,
+              quantity: document.getElementById(`quantity-${pesticide}`).value
+            }))
+          }
+        };
+
+        try {
+          const response = await fetch('http://localhost:5000/api/pesticideSeller', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(pesticideSellerData)
+          });
+
+          const result = await response.json();
+
+          if (response.ok) {
+            alert('✅ Data saved successfully!');
+            window.location.href ='index.html' ;
+          } else {
+            alert('✅ Data submitted successfully!');
+            window.location.href = 'index.html';
+          }
+        } catch (error) {
+          console.error('Error submitting form:', error);
+          alert('❌ Error comin.....');
+          window.location.href = 'index.html'; // Ensures redirection even in case of failure
+        }
+      });
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.6.0/dist/web3.min.js"></script>
+  <script>
+    let web3;
+    let pesticideSellerContract;
+
+    const contractAddress = "0xd9145CCE52D386f254917e481eB44e9943F39138"; // Replace with your contract address
+    const contractABI = [
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "string",
+            "name": "aadharNumber",
+            "type": "string"
+          },
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "farmerName",
+            "type": "string"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "timestamp",
+            "type": "uint256"
+          }
+        ],
+        "name": "PesticideSellerDataSubmitted",
+        "type": "event"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "farmerName",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "aadharNumber",
+            "type": "string"
+          },
+          {
+            "internalType": "bool",
+            "name": "farmerFillData",
+            "type": "bool"
+          },
+          {
+            "internalType": "string[]",
+            "name": "cropNames",
+            "type": "string[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "cropQuantities",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "string[]",
+            "name": "pesticideNames",
+            "type": "string[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "pesticideQuantities",
+            "type": "uint256[]"
+          }
+        ],
+        "name": "submitPesticideSellerData",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      }
+    ];
+
+    window.addEventListener('load', () => {
+      web3 = new Web3('http://localhost:7545'); // Connect to Ganache
+      pesticideSellerContract = new web3.eth.Contract(contractABI, contractAddress);
+      web3.eth.getAccounts().then(console.log); // Optionally log Ganache accounts to console
+    });
+  </script>
+
+</body>
+</html>

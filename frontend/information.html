@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-key="title">Information about Various Pesticides Used for Farming Crops in India</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #e0f7fa, #b9fbc0);
+            color: #333;
+            position: relative;
+
+        }
+        h1 {
+            text-align: center;
+            color: #1a3c34;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        table {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            background: #fff;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            transition: all 0.3s ease;
+        }
+        th {
+            background: #2e7d32;
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        td {
+            background: #fafafa;
+        }
+        tr:hover td {
+            background: #c8e6c9;
+            transform: scale(1.02);
+            cursor: pointer;
+        }
+        tr {
+            transition: transform 0.3s ease;
+        }
+        .natural {
+            color: #388e3c;
+            font-weight: 500;
+        }
+        .chemical {
+            color: #d32f2f;
+            font-weight: 500;
+        }
+        .references, .team {
+            margin: 30px auto;
+            font-size: 1em;
+            text-align: center;
+            animation: slideUp 2s ease-in-out;
+            max-width: 1200px;
+        }
+        .references a {
+            color: #0288d1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .references a:hover {
+            color: #01579b;
+            text-decoration: underline;
+        }
+        .team {
+            font-weight: bold;
+            color: #1a3c34;
+            font-size: 1.2em;
+        }
+
+        .lang-switcher {
+      position: fixed;
+      top: 70px;
+      left: 10px;
+      z-index: 1001;
+    }
+    .lang-switcher button {
+      margin: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+      margin-top:15px;
+      border-radius:15px;
+      display:flex;
+    }
+    .lang-switcher button.active {
+      background: #007bff;
+      color: white;
+    }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="lang-switcher">
+        <button data-lang="en">English</button>
+        <button data-lang="hi">हिन्दी</button>
+        <button data-lang="mr">मराठी</button>
+        <button data-lang="te">తెలుగు</button>
+        <button data-lang="ta">தமிழ்</button>
+        
+    </div>
+
+    <div class="leaf"></div>
+    <div class="leaf"></div>
+    <div class="leaf"></div>
+    <div class="leaf"></div>
+    <div class="leaf"></div>
+
+    <h1 data-key="title">Information about Various Pesticides Used for Farming Crops in India</h1>
+    <table>
+        <tr>
+            <th data-key="crop-name">Crop Name</th>
+            <th data-key="natural-pesticides">Natural Pesticides (3)</th>
+            <th data-key="chemical-pesticides">Chemical Pesticides (2)</th>
+        </tr>
+        <tr><td data-key="crop-apple">Apple</td><td class="natural" data-key="nat-apple">Neem Oil, Diatomaceous Earth, Pyrethrins</td><td class="chemical" data-key="chem-apple">Captan, Mancozeb</td></tr>
+        <tr><td data-key="crop-rice">Rice</td><td class="natural" data-key="nat-rice">Garlic Oil Spray, Neem Oil, Spinosad</td><td class="chemical" data-key="chem-rice">Chlorpyrifos, Imidacloprid</td></tr>
+        <tr><td data-key="crop-wheat">Wheat</td><td class="natural" data-key="nat-wheat">Karanja Oil, Garlic Oil Spray, Neem Oil</td><td class="chemical" data-key="chem-wheat">Mancozeb, Tebuconazole</td></tr>
+        <tr><td data-key="crop-sugarcane">Sugarcane</td><td class="natural" data-key="nat-sugarcane">Neem Oil, Spinosad, Karanja Oil</td><td class="chemical" data-key="chem-sugarcane">Carbofuran, Malathion</td></tr>
+        <tr><td data-key="crop-banana">Banana</td><td class="natural" data-key="nat-banana">Garlic Oil Spray, Neem Oil, Pyrethrins</td><td class="chemical" data-key="chem-banana">Copper Fungicide, Chlorothalonil</td></tr>
+    </table>
+
+    <div class="references">
+        <p><strong data-key="references-label">References:</strong> <span data-key="references-text">Information compiled from websites such as the Indian Council of Agricultural Research (ICAR) - </span><a href="https://icar.org.in">icar.org.in</a>, <span data-key="references-text2">Directorate of Plant Protection, Quarantine & Storage - </span><a href="http://ppqs.gov.in">ppqs.gov.in</a>, <span data-key="references-text3">and Food and Agriculture Organization (FAO) - </span><a href="https://www.fao.org">fao.org</a>.</p>
+    </div>
+    <div class="team">
+        <p><span data-key="team-text">Concluded by our team:</span> <strong data-key="team-name">Aarambh</strong></p>
+    </div>
+
+    <script>
+        const translations = {
+            en: {
+                title: "Information about Various Pesticides Used for Farming Crops in India",
+                "crop-name": "Crop Name",
+                "natural-pesticides": "Natural Pesticides (3)",
+                "chemical-pesticides": "Chemical Pesticides (2)",
+                "crop-apple": "Apple",
+                "nat-apple": "Neem Oil, Diatomaceous Earth, Pyrethrins",
+                "chem-apple": "Captan, Mancozeb",
+                "crop-rice": "Rice",
+                "nat-rice": "Garlic Oil Spray, Neem Oil, Spinosad",
+                "chem-rice": "Chlorpyrifos, Imidacloprid",
+                "crop-wheat": "Wheat",
+                "nat-wheat": "Karanja Oil, Garlic Oil Spray, Neem Oil",
+                "chem-wheat": "Mancozeb, Tebuconazole",
+                "crop-sugarcane": "Sugarcane",
+                "nat-sugarcane": "Neem Oil, Spinosad, Karanja Oil",
+                "chem-sugarcane": "Carbofuran, Malathion",
+                "crop-banana": "Banana",
+                "nat-banana": "Garlic Oil Spray, Neem Oil, Pyrethrins",
+                "chem-banana": "Copper Fungicide, Chlorothalonil",
+                "references-text": "Information compiled from websites such as the Indian Council of Agricultural Research (ICAR) - ",
+                "references-text2": "Directorate of Plant Protection, Quarantine & Storage - ",
+                "references-text3": "and Food and Agriculture Organization (FAO) - ",
+                "team-text": "Concluded by our team:",
+                "team-name": "Aarambh"
+        
+            },
+            hi: {
+    "title": "भारत में कृषि फसलों के लिए उपयोग किए जाने वाले विभिन्न कीटनाशकों की जानकारी",
+    "crop-name": "फसल का नाम",
+    "natural-pesticides": "प्राकृतिक कीटनाशक (3)",
+    "chemical-pesticides": "रासायनिक कीटनाशक (2)",
+    "crop-apple": "सेब",
+    "nat-apple": "नीम तेल, डायटोमेसियस अर्थ, पाइरेथ्रिन्स",
+    "chem-apple": "कैप्टन, मैंकोज़ेब",
+    "crop-rice": "चावल",
+    "nat-rice": "लहसुन तेल स्प्रे, नीम तेल, स्पिनोसैड",
+    "chem-rice": "क्लोरपाइरीफोस, इमिडाक्लोप्रिड",
+    "crop-wheat": "गेहूं",
+    "nat-wheat": "करंजा तेल, लहसुन तेल स्प्रे, नीम तेल",
+    "chem-wheat": "मैंकोज़ेब, टेबुकोनाज़ोल",
+    "crop-sugarcane": "गन्ना",
+    "nat-sugarcane": "नीम तेल, स्पिनोसैड, करंजा तेल",
+    "chem-sugarcane": "कार्बोफ्यूरान, मैलाथियॉन",
+    "crop-banana": "केला",
+    "nat-banana": "लहसुन तेल स्प्रे, नीम तेल, पाइरेथ्रिन्स",
+    "chem-banana": "कॉपर फंगीसाइड, क्लोरोथालोनिल",
+    "references-text": "जानकारी निम्नलिखित वेबसाइटों से संकलित की गई है: भारतीय कृषि अनुसंधान परिषद (ICAR) - ",
+    "references-text2": "वनस्पति संरक्षण, संगरोध और भंडारण निदेशालय - ",
+    "references-text3": "और खाद्य और कृषि संगठन (FAO) - ",
+    "team-text": "हमारी टीम द्वारा निष्कर्षित:",
+    "team-name": "आरंभ"
+}
+,
+
+        mr : {title: "भारतातील शेती पिकांसाठी वापरण्यात येणाऱ्या विविध कीटकनाशकांची माहिती",
+    "crop-name": "पीकाचे नाव",
+    "natural-pesticides": "सेंद्रिय कीटकनाशके (3)",
+    "chemical-pesticides": "रासायनिक कीटकनाशके (2)",
+    "crop-apple": "सफरचंद",
+    "nat-apple": "नीम तेल, डायटोमेशियस अर्थ, पाइरेथ्रिन्स",
+    "chem-apple": "कॅप्टन, मॅन्कोझेब",
+    "crop-rice": "तांदूळ",
+    "nat-rice": "लसूण तेल स्प्रे, नीम तेल, स्पिनोसॅड",
+    "chem-rice": "क्लोरपायरीफॉस, इमिडाक्लोप्रिड",
+    "crop-wheat": "गहू",
+    "nat-wheat": "करंजा तेल, लसूण तेल स्प्रे, नीम तेल",
+    "chem-wheat": "मॅन्कोझेब, टेबुकोनाझोल",
+    "crop-sugarcane": "ऊस",
+    "nat-sugarcane": "नीम तेल, स्पिनोसॅड, करंजा तेल",
+    "chem-sugarcane": "कार्बोफ्यूरान, मॅलाथियॉन",
+    "crop-banana": "केळी",
+    "nat-banana": "लसूण तेल स्प्रे, नीम तेल, पाइरेथ्रिन्स",
+    "chem-banana": "कॉपर फंगीसाइड, क्लोरोथालोनिल",
+    "references-text": "ही माहिती खालील वेबसाइट्स वरून संकलित केली आहे: भारतीय कृषी संशोधन परिषद (ICAR) - ",
+    "references-text2": "वनस्पती संरक्षण, संगरोध आणि साठवण संचालनालय - ",
+    "references-text3": "आणि अन्न व कृषी संघटना (FAO) - ",
+    "team-text": "आमच्या टीमने निष्कर्ष काढला:",
+    "team-name": "आरंभ"
+},
+te:{
+    title: "భారతదేశంలో వ్యవసాయ పంటల కోసం ఉపయోగించే వివిధ పురుగుమందుల సమాచారం",
+    "crop-name": "పంట పేరు",
+    "natural-pesticides": "సహజ పురుగుమందులు (3)",
+    "chemical-pesticides": "రసాయన పురుగుమందులు (2)",
+    "crop-apple": "యాపిల్",
+    "nat-apple": "నీమ్చెరకు నూనె, డయాటొమేషియస్ ఎర్త్, పైరేత్రిన్స్",
+    "chem-apple": "కాప్టాన్, మాంకోజెబ్",
+    "crop-rice": "బియ్యం",
+    "nat-rice": "వెల్లుల్లి నూనె స్ప్రే, నీం నూనె, స్పినోసాడ్",
+    "chem-rice": "క్లోర్పైరిఫోస్, ఇమిడాక్లోప్రిడ్",
+    "crop-wheat": "గోధుమ",
+    "nat-wheat": "కరంజా నూనె, వెల్లుల్లి నూనె స్ప్రే, నీం నూనె",
+    "chem-wheat": "మాంకోజెబ్, టెబుకొనాజోల్",
+    "crop-sugarcane": "తేలుగు",
+    "nat-sugarcane": "నీం నూనె, స్పినోసాడ్, కరంజా నూనె",
+    "chem-sugarcane": "కార్బోఫ్యూరాన్, మాలాథియాన్",
+    "crop-banana": "అరటి",
+    "nat-banana": "వెల్లుల్లి నూనె స్ప్రే, నీం నూనె, పైరేత్రిన్స్",
+    "chem-banana": "కాపర్ ఫంగీసైడ్, క్లోరోథాలోనిల్",
+    "references-text": "ఈ సమాచారం క్రింది వెబ్‌సైట్‌ల నుండి సేకరించబడింది: భారతీయ వ్యవసాయ పరిశోధనా మండలి (ICAR) - ",
+    "references-text2": "ప్లాంట్ ప్రొటెక్షన్, క్వారంటైన్ & స్టోరేజ్ డైరెక్టరేట్ - ",
+    "references-text3": "మరియు ఆహారం మరియు వ్యవసాయ సంస్థ (FAO) - ",
+    "team-text": "మా బృందం అందించిన ఫలితాలు:",
+    "team-name": "ఆరంభ్"
+},
+ta:{
+    title: "இந்தியாவில் விவசாய பயிர்களுக்கு பயன்படுத்தப்படும் வேர் பூச்சிக்கொல்லிகள் பற்றிய தகவல்",
+    "crop-name": "பயிர் பெயர்",
+    "natural-pesticides": "இயற்கை பூச்சிக்கொல்லிகள் (3)",
+    "chemical-pesticides": "ரசாயன பூச்சிக்கொல்லிகள் (2)",
+    "crop-apple": "ஆப்பிள்",
+    "nat-apple": "வேப்பெண்ணெய், டையாடமேசியஸ் எர்த், பயிரெத்ரின்ஸ்",
+    "chem-apple": "கேப்டன், மான்கோசேப்",
+    "crop-rice": "அரிசி",
+    "nat-rice": "பூண்டு எண்ணெய் ஸ்ப்ரே, வேப்பெண்ணெய், ஸ்பினோசாட்",
+    "chem-rice": "குளோர்பைரிபாஸ், இமிடக்ளோப்ரிட்",
+    "crop-wheat": "கோதுமை",
+    "nat-wheat": "கரஞ்சா எண்ணெய், பூண்டு எண்ணெய் ஸ்ப்ரே, வேப்பெண்ணெய்",
+    "chem-wheat": "மான்கோசேப், டெபுகோனசோல்",
+    "crop-sugarcane": "கரும்பு",
+    "crop-banana": "வாழைப்பழம்",
+    "team-name": "ஆரம்ப்"
+}
+
+
+
+        };
+
+        function setLanguage(lang) {
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            document.querySelectorAll('.lang-switcher button').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+            });
+            document.documentElement.lang = lang;
+        }
+
+        document.querySelectorAll('.lang-switcher button').forEach(button => {
+            button.addEventListener('click', () => setLanguage(button.getAttribute('data-lang')));
+        });
+
+        setLanguage('en');
+    </script>
+</body>
+</html>

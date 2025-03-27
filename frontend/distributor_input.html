@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Distributor's Dashboard</title>
+  <style>
+    /* Your existing CSS styles */
+    body, h1, label, input, button {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: url("Distributordata.png");
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.727);
+      padding: 2rem;
+      border-radius: 20px;
+      
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      max-width: 400px;
+      width: 90%;
+      margin-right: 300px;
+      text-align: center;
+    }
+
+    .container h1 {
+      color: #056508;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    input, button {
+      padding: 0.9rem;
+      width: 100%;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .message {
+      margin-top: 1rem;
+      display: none;
+      padding: 0.8rem;
+      border-radius: 8px;
+    }
+
+    .success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+
+   
+
+    .input-group {
+      margin: 15px 0;
+    }
+
+    label {
+      display: block;
+      font-size: 20px;
+      margin-top: 12px;
+      font-weight: bold;
+      color: #252020;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .result {
+      margin-top: 20px;
+      text-align: center;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border-radius: 4px;
+    }
+
+    /* Language Selection Styles */
+    .language-selection {
+      position: absolute;
+      top: 10px;
+      font-size:20px;
+      font-weight:bold;
+      right: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .language-selection button {
+      margin: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+      margin-top:15px;
+      border-radius:15px;
+      display:flex;
+    }
+    .language-selection button.active {
+      background: #007bff;
+      color: white;
+    }
+
+    .container1{
+      
+      background-color: rgba(255, 255, 255, 0.715);
+      padding: 24px;
+      border-radius: 20px;
+      margin-bottom:450px;
+      gap: 30px; 
+      margin-right:120px;
+      
+      
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+    }
+
+    .container1 h1{
+
+      color: #0b690e;
+    }
+    .container1 button{
+      
+      width: 100%;
+      padding: 10px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      font-size: 19px;
+      font-weight: bold;
+      border: none;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      
+      display:flex;
+      gap:20px;
+      border-radius: 0px;
+      cursor: pointer;
+      border-radius: 10px;
+      
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+    .b2{
+      margin-top: 15px;
+      
+      
+    }
+    .b1{
+      margin-top: 20px;
+    }
+
+    
+
+    
+  </style>
+</head>
+<body>
+  <!-- Language Selection Section -->
+  <div class="language-selection">
+    <h2>Select Language:</h2>
+    <div class="language-buttons">
+      <button data-lang="en">English</button>
+      <button data-lang="hi">हिंदी</button>
+      <button data-lang="mr">मराठी</button>
+      <button data-lang="te">తెలుగు</button>
+      <button data-lang="ta">தமிழ்</button>
+      <button data-lang="kn">ಕನ್ನಡ</button>
+    </div>
+  </div>
+  <div class="container1">
+
+    <div class="b2">
+      <button onclick = "click2()">Quality Checker</button>
+    </div>
+    
+
+    
+  
+  </div>
+
+  <div class="container">
+    <h1 id="formTitle">Distributor Data</h1>
+    <form id="distributor-input-form">
+      <label for="productName" id="productNameLabel">Product Name:</label>
+      <input type="text" id="productName" required />
+      
+      <label for="pickingDate" id="pickingDateLabel">Date of Stock Arrival:</label>
+      <input type="date" id="pickingDate" required />
+      <label for="location" id="locationLabel">Location:</label>
+      <input type="text" id="location" required />
+
+      <label for="farmerAadhar" id="farmerAadharLabel">Farmer's Aadhar No.:</label>
+      <input type="text" id="farmerAadhar" required />
+
+      <label for="vname" id="vnameLabel">Vendor's Name:</label>
+      <input type="text" id="vname" required />
+
+      <button type="submit" id="submitButton">Submit</button>
+    </form>
+
+    <div id="distributorMessage" class="message"></div>
+
+    
+
+  <script>
+
+    function click2()
+    {
+      window.location.href = "qp.html";
+    }
+    // Language translations
+    const translations = {
+      en: {
+        formTitle: "Distributor Data",
+        productNameLabel: "Product Name:",
+        pickingDateLabel: "Date of Stock Arrival:",
+        locationLabel: "Location:",
+        farmerAadharLabel: "Farmer's Aadhar No.:",
+        vnameLabel: "Vendor's Name:",
+        submitButton: "Submit",
+        cropYieldTitle: "Crop Yield Predictor",
+        cropTypeLabel: "Crop Type:",
+        sizeLabel: "Field Size (acres):",
+        predictButton: "Predict Yield",
+        predictedYieldTitle: "Predicted Yield:",
+      },
+      hi: {
+        formTitle: "वितरक डेटा",
+        productNameLabel: "उत्पाद का नाम:",
+        pickingDateLabel: "स्टॉक आगमन की तिथि:",
+        locationLabel: "स्थान:",
+        farmerAadharLabel: "किसान का आधार नंबर:",
+        vnameLabel: "विक्रेता का नाम:",
+        submitButton: "प्रस्तुत करें",
+        cropYieldTitle: "फसल उपज भविष्यवक्ता",
+        cropTypeLabel: "फसल का प्रकार:",
+        sizeLabel: "खेत का आकार (एकड़ में):",
+        predictButton: "उपज का अनुमान लगाएं",
+        predictedYieldTitle: "अनुमानित उपज:",
+      },
+      mr: {
+        formTitle: "वितरक डेटा",
+        productNameLabel: "उत्पादाचे नाव:",
+        pickingDateLabel: "स्टॉक आगमन तारीख:",
+        locationLabel: "स्थान:",
+        farmerAadharLabel: "शेतकऱ्याचा आधार क्रमांक:",
+        vnameLabel: "विक्रेत्याचे नाव:",
+        submitButton: "सबमिट करा",
+        cropYieldTitle: "पीक उत्पादन अंदाजक",
+        cropTypeLabel: "पीक प्रकार:",
+        sizeLabel: "शेताचा आकार (एकर मध्ये):",
+        predictButton: "उत्पादनाचा अंदाज घ्या",
+        predictedYieldTitle: "अंदाजित उत्पादन:",
+      },
+      te: {
+        formTitle: "డిస్ట్రిబ్యూటర్ డేటా",
+        productNameLabel: "ఉత్పత్తి పేరు:",
+        pickingDateLabel: "స్టాక్ రాక తేదీ:",
+        locationLabel: "స్థానం:",
+        farmerAadharLabel: "రైతు ఆధార్ నం.:",
+        vnameLabel: "విక్రేత పేరు:",
+        submitButton: "సమర్పించండి",
+        cropYieldTitle: "పంట దిగుబడి ఊహాజనక",
+        cropTypeLabel: "పంట రకం:",
+        sizeLabel: "నివేశిక పరిమాణం (ఎకరాలలో):",
+        predictButton: "దిగుబడి అంచనా వేయండి",
+        predictedYieldTitle: "అంచనా దిగుబడి:",
+      },
+      ta: {
+        formTitle: "விநியோகஸ்தர் தரவு",
+        productNameLabel: "தயாரிப்பு பெயர்:",
+        pickingDateLabel: "பங்கு வருகை தேதி:",
+        locationLabel: "இடம்:",
+        farmerAadharLabel: "விவசாயியின் ஆதார் எண்:",
+        vnameLabel: "விற்பனையாளர் பெயர்:",
+        submitButton: "சமர்ப்பிக்கவும்",
+        cropYieldTitle: "பயிர் மகசூல் கணிப்பான்",
+        cropTypeLabel: "பயிர் வகை:",
+        sizeLabel: "வயல் அளவு (ஏக்கரில்):",
+        predictButton: "மகசூலை கணிக்கவும்",
+        predictedYieldTitle: "கணிக்கப்பட்ட மகசூல்:",
+      },
+      kn: {
+        formTitle: "ವಿತರಕ ಡೇಟಾ",
+        productNameLabel: "ಉತ್ಪನ್ನದ ಹೆಸರು:",
+        pickingDateLabel: "ಸ್ಟಾಕ್ ಆಗಮನ ದಿನಾಂಕ:",
+        locationLabel: "ಸ್ಥಳ:",
+        farmerAadharLabel: "ರೈತರ ಆಧಾರ್ ಸಂಖ್ಯೆ:",
+        vnameLabel: "ವಿಕ್ರೇತರ ಹೆಸರು:",
+        submitButton: "ಸಲ್ಲಿಸು",
+        cropYieldTitle: "ಬೆಳೆ ಇಳುವರಿ ಊಹಾಜನಕ",
+        cropTypeLabel: "ಬೆಳೆ ಪ್ರಕಾರ:",
+        sizeLabel: "ಕ್ಷೇತ್ರದ ಗಾತ್ರ (ಎಕರೆಗಳಲ್ಲಿ):",
+        predictButton: "ಇಳುವರಿ ಊಹಿಸಿ",
+        predictedYieldTitle: "ಊಹಿಸಲಾದ ಇಳುವರಿ:",
+      },
+    };
+
+    // Function to update the language
+    function updateLanguage(lang) {
+  const translation = translations[lang];
+  document.getElementById("formTitle").textContent = translation.formTitle;
+  document.getElementById("productNameLabel").textContent = translation.productNameLabel;
+  document.getElementById("pickingDateLabel").textContent = translation.pickingDateLabel;
+  document.getElementById("locationLabel").textContent = translation.locationLabel;
+  document.getElementById("farmerAadharLabel").textContent = translation.farmerAadharLabel;
+  document.getElementById("vnameLabel").textContent = translation.vnameLabel;
+  document.getElementById("submitButton").textContent = translation.submitButton;
+}
+
+    // Add event listeners to language buttons
+    document.querySelectorAll(".language-buttons button").forEach((button) => {
+      button.addEventListener("click", () => {
+        const lang = button.getAttribute("data-lang");
+        updateLanguage(lang);
+      });
+    });
+
+    // Set default language to English
+    updateLanguage("en");
+    
+    let web3;
+    let distributorRegistryContract;
+    const contractAddress = "0xD4Fc541236927E2EAf8F27606bD7309C1Fc2cbee"; // Replace with your contract address
+    const contractABI = [
+      // Include the ABI of your contract
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "string",
+            "name": "farmerAadhar",
+            "type": "string"
+          },
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "productName",
+            "type": "string"
+          },
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "pickingDate",
+            "type": "string"
+          },
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "location",
+            "type": "string"
+          },
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "vendorName",
+            "type": "string"
+          }
+        ],
+        "name": "DistributorDataSubmitted",
+        "type": "event"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "farmerAadhar",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "productName",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "pickingDate",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "location",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "vendorName",
+            "type": "string"
+          }
+        ],
+        "name": "submitDistributorData",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      }
+    ];
+  
+    window.addEventListener('load', () => {
+      // Connect to Ganache's local blockchain
+      web3 = new Web3('http://localhost:7545'); // Ganache default RPC URL
+  
+      // Set up the contract
+      distributorRegistryContract = new web3.eth.Contract(contractABI, contractAddress);
+  
+      // Optionally, you can log the accounts available on Ganache
+      web3.eth.getAccounts().then(console.log);
+    });
+  
+    // Consolidated submit handler
+    async function submitForm(event) {
+  event.preventDefault();
+
+  // Collect form data
+  const formData = {
+    productName: document.getElementById('productName').value,
+    pickingDate: document.getElementById('pickingDate').value,
+    location: document.getElementById('location').value,
+    farmerAadhar: document.getElementById('farmerAadhar').value,
+    vendorName: document.getElementById('vname').value,
+  };
+
+  try {
+    const response = await fetch('http://localhost:5000/api/distributor', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      // Display success message
+      const messageElement = document.getElementById('distributorMessage');
+      messageElement.className = 'message success';
+      messageElement.textContent = 'Data submitted successfully!';
+
+      // Redirect to the QR display page with the Aadhar number
+      window.location.href = `qr_display.html?aadhar=${encodeURIComponent(formData.farmerAadhar)}`;
+    } else {
+      // Handle failure
+      const messageElement = document.getElementById('distributorMessage');
+      messageElement.className = 'message error';
+      messageElement.textContent = result.message || 'Failed to submit data.';
+    }
+  } catch (error) {
+    console.error('Error submitting form:', error);
+  }
+
+      // 2. Submit data to Ethereum smart contract
+      try {
+        const accounts = await web3.eth.getAccounts(); // Get the first account from Ganache
+        await distributorRegistryContract.methods
+          .submitDistributorData(
+            formData.farmerAadhar,
+            formData.productName,
+            formData.pickingDate,
+            formData.location,
+            formData.vendorName
+          )
+          .send({ from: accounts[0] }); // Send from the first account in Ganache
+  
+        messageElement.textContent = '✅ Distributor data submitted successfully to the contract!';
+        messageElement.className = 'message success';
+        messageElement.style.display = 'block';
+  
+        // Optionally, you can redirect after submission or do something else
+        setTimeout(() => {
+          //window.location.href = 'index.html'; // Redirect to homepage or another page
+        }, 2000); // Adjust the delay if necessary
+  
+      } catch (error) {
+        console.error('Error submitting data to smart contract:', error);
+        messageElement.textContent = '❌ Failed to submit data to the smart contract.';
+        messageElement.className = 'message error';
+        messageElement.style.display = 'block';
+      }
+    }
+  
+    // Attach the submit handler to the form
+    document.getElementById('distributor-input-form').addEventListener('submit', submitForm);
+  
+    
+
+  </script>
+  
+</body>
+
+</html>

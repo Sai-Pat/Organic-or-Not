@@ -1,0 +1,160 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body and Background */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f8fb;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Main Container */
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+h1 {
+  text-align: center;
+  color: #2a9d8f;
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+}
+
+/* Section Styling */
+.section {
+  background-color: #e9f5f3;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #264653;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+h2::before {
+  content: '';
+  display: inline-block;
+  background: url('\Images\farmers_442495.png') no-repeat center;
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+ul {
+  padding-left: 20px;
+  list-style-type: none;
+}
+
+ul li {
+  margin-bottom: 15px;
+}
+
+/* Text Styling for the Info */
+p {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+strong {
+  color: #2a9d8f;
+}
+
+/* Responsive Layouts */
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+}
+
+/* Icons next to Text */
+p strong {
+  color: #2a9d8f;
+}
+
+/* Pesticides Section with Icons */
+.section.pesticides {
+  background-color: #ffebee;
+}
+
+h2.pesticides::before {
+  content: '';
+  display: inline-block;
+  background: url('') no-repeat center;
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+/* Products Section with Icons */
+.section.products {
+  background-color: #e1f7d5;
+}
+
+h2.products::before {
+  content: '';
+  display: inline-block;
+  background: url('https://img.icons8.com/ios/50/000000/products.png') no-repeat center;
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+/* Distributor Section with Icons */
+.section.distributor {
+  background-color: #d6f8ff;
+}
+
+h2.distributor::before {
+  content: '';
+  display: inline-block;
+  background: url('https://img.icons8.com/ios/50/000000/distributor.png') no-repeat center;
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+/* Custom Date Styling */
+p strong.date {
+  color: #f4a261;
+}
+
+/* Add Hover Effects */
+ul li:hover {
+  background-color: #e1e1e1;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Section Header Hover Effects */
+h2:hover {
+  color: #e76f51;
+}

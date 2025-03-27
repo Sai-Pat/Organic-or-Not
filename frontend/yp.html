@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yield Predictor</title>
+    <link rel="stylesheet" href="stylesyp.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Crop Yield Predictor</h1>
+        
+        <div class="input-group">
+            <label for="state">State:</label>
+            <select id="state" onchange="updateEnvironmentalData()">
+                <option value="">Select a state</option>
+                <option value="andaman-and-nicobar-islands">Andaman and Nicobar Islands</option>
+                <option value="andhra-pradesh">Andhra Pradesh</option>
+                <option value="arunachal-pradesh">Arunachal Pradesh</option>
+                <option value="assam">Assam</option>
+                <option value="bihar">Bihar</option>
+                <option value="chhattisgarh">Chhattisgarh</option>
+                <option value="goa">Goa</option>
+                <option value="gujarat">Gujarat</option>
+                <option value="haryana">Haryana</option>
+                <option value="himachal-pradesh">Himachal Pradesh</option>
+                <option value="jharkhand">Jharkhand</option>
+                <option value="karnataka">Karnataka</option>
+                <option value="kerala">Kerala</option>
+                <option value="madhya-pradesh">Madhya Pradesh</option>
+                <option value="maharashtra">Maharashtra</option>
+                <option value="manipur">Manipur</option>
+                <option value="meghalaya">Meghalaya</option>
+                <option value="mizoram">Mizoram</option>
+                <option value="nagaland">Nagaland</option>
+                <option value="odisha">Odisha</option>
+                <option value="punjab">Punjab</option>
+                <option value="rajasthan">Rajasthan</option>
+                <option value="sikkim">Sikkim</option>
+                <option value="tamil-nadu">Tamil Nadu</option>
+                <option value="telangana">Telangana</option>
+                <option value="tripura">Tripura</option>
+                <option value="uttar-pradesh">Uttar Pradesh</option>
+                <option value="uttarakhand">Uttarakhand</option>
+                <option value="west-bengal">West Bengal</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="cropType">Crop Type:</label>
+            <select id="cropType">
+                <option value="wheat">Wheat</option>
+                <option value="rice">Rice</option>
+                <option value="apple">Apple</option>
+                <option value="banana">Banana</option>
+                <option value="sugarcane">Sugarcane</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="size">Field Size (acres):</label>
+            <input type="number" id="size" min="0" max="24710" step="0.1" placeholder="Enter size in acres">
+        </div>
+
+        <div class="input-group">
+            <label for="fertilizer">Fertilizer:</label>
+            <select id="fertilizer">
+                <option value="none">None</option>
+                <option value="compost">Compost</option>
+                <option value="bone-meal">Bone Meal</option>
+                <option value="seaweed-extract">Seaweed Extract</option>
+                <option value="fish-meal">Fish Meal</option>
+                <option value="kelp-meal">Kelp Meal</option>
+                <option value="cottonseed-meal">Cottonseed Meal</option>
+                <option value="dolomitic-lime">Dolomitic Lime</option>
+                <option value="fish-emulsion">Fish Emulsion</option>
+                <option value="manure">Manure</option>
+                <option value="rock-phosphate">Rock Phosphate</option>
+                <option value="bat-guano">Bat Guano</option>
+                <option value="worm-castings">Worm Castings</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="rainfall">Annual Rainfall (mm):</label>
+            <input type="number" id="rainfall" min="0" max="4000" step="1" placeholder="Auto-filled by state">
+        </div>
+
+        <div class="input-group">
+            <label for="temperature">Avg Temperature (°C):</label>
+            <input type="number" id="temperature" min="0" max="50" step="0.1" placeholder="Auto-filled by state">
+        </div>
+
+        <div class="input-group">
+            <label for="soilQuality">Soil Quality (1-5):</label>
+            <input type="number" id="soilQuality" min="1" max="5" step="1" placeholder="Auto-filled by state">
+        </div>
+
+        <button onclick="predictYield()">Predict Yield</button>
+
+        <div id="result" class="result">
+            <h2>Predicted Yield: <span id="yieldValue">-</span> tons</h2>
+        </div>
+    </div>
+    <script src="scriptyp.js"></script>
+</body>
+</html>

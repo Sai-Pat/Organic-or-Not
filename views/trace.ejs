@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Traceability</title>
+  <link rel="stylesheet" href="/styleT.css">
+  <style>
+    .language-selector {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .language-selector button {
+      margin: 0 10px;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+  </style>
+  <script>
+    function changeLanguage(lang) {
+      // Get all elements with class "translate"
+      const elements = document.querySelectorAll('.translate');
+
+      // Update text for each element based on the selected language
+      elements.forEach(element => {
+        const key = element.getAttribute('data-key');
+        if (translations[lang] && translations[lang][key]) {
+          element.innerText = translations[lang][key];
+        }
+      });
+
+      // Translate product names
+      const productNames = document.querySelectorAll('.product-name');
+      productNames.forEach(product => {
+        const productKey = product.getAttribute('data-product');
+        if (translations[lang] && translations[lang][productKey]) {
+          product.innerText = translations[lang][productKey];
+        }
+      });
+
+      // Translate pesticide names
+      const pesticideNames = document.querySelectorAll('.pesticide-name');
+      pesticideNames.forEach(pesticide => {
+        const pesticideKey = pesticide.getAttribute('data-pesticide');
+        if (translations[lang] && translations[lang][pesticideKey]) {
+          pesticide.innerText = translations[lang][pesticideKey];
+        }
+      });
+    }
+
+    // Define translations for each language
+    const translations = {
+      'en': {
+        'productOriginDetails': 'Product Origin Details',
+        'farmerDetails': 'Farmer Details',
+        'farmerName': 'Name',
+        'farmerLocation': 'Location',
+        'farmSize': 'Farm Size',
+        'certification': 'Certification',
+        'products': 'Products',
+        'productName': 'Product Name',
+        'quantity': 'Quantity',
+        'growthPeriod': 'Growth Period',
+        'fertilizerUsed': 'Fertilizer Used',
+        'distributorDetails': 'Distributor Details',
+        'vendorName': 'Vendor Name',
+        'pickingDate': 'Picking Date',
+        'noProducts': 'No products found.',
+        'noPesticides': 'No pesticide data available.',
+        'farmerNameValue': 'Balu',
+        'vendorNameValue': 'Mora',
+        // Product names
+        'apple': 'Apple',
+        'sugarcane': 'Sugarcane',
+        'rice': 'Rice',
+        'banana': 'Banana',
+        'wheat': 'Wheat',
+        // Pesticide names
+        'Compost': 'Compost',
+        'Bone Meal': 'Bone Meal',
+        'Seaweed Extract': 'Seaweed Extract',
+        'Fish Meal': 'Fish Meal',
+        'Kelp Meal': 'Kelp Meal',
+        'Cottonseed Meal': 'Cottonseed Meal',
+        'Dolomitic Lime': 'Dolomitic Lime',
+        'Fish Emulsion': 'Fish Emulsion',
+        'Manure': 'Manure',
+        'Rock Phosphate': 'Rock Phosphate',
+        'Bat Guano': 'Bat Guano',
+        'Worm Castings': 'Worm Castings',
+      },
+      'hi': {
+        'productOriginDetails': 'उत्पाद मूल विवरण',
+        'farmerDetails': 'किसान विवरण',
+        'farmerName': 'नाम',
+        'farmerLocation': 'स्थान',
+        'farmSize': 'खेत का आकार',
+        'certification': 'प्रमाणीकरण',
+        'products': 'उत्पाद',
+        'productName': 'उत्पाद नाम',
+        'quantity': 'मात्रा',
+        'growthPeriod': 'विकास अवधि',
+        'fertilizerUsed': 'उर्वरक उपयोग',
+        'distributorDetails': 'वितरक विवरण',
+        'vendorName': 'विक्रेता नाम',
+        'pickingDate': 'चयन की तारीख',
+        'noProducts': 'कोई उत्पाद नहीं मिला।',
+        'noPesticides': 'कोई उर्वरक डेटा उपलब्ध नहीं है।',
+        'farmerNameValue': 'बालू',
+        'vendorNameValue': 'मोरा',
+        // Product names
+        'apple': 'सेब',
+        'sugarcane': 'गन्ना',
+        'rice': 'चावल',
+        'banana': 'केला',
+        'wheat': 'गेहूं',
+        // Pesticide names
+        'Compost': 'कम्पोस्ट',
+        'Bone Meal': 'हड्डी का भोजन',
+        'Seaweed Extract': 'समुद्री शैवाल निकालें',
+        'Fish Meal': 'मछली का भोजन',
+        'Kelp Meal': 'केल्प भोजन',
+        'Cottonseed Meal': 'कपास के बीज का भोजन',
+        'Dolomitic Lime': 'डोलोमाइटिक चूना',
+        'Fish Emulsion': 'मछली इमल्शन',
+        'Manure': 'खाद',
+        'Rock Phosphate': 'रॉक फॉस्फेट',
+        'Bat Guano': 'बैट गुआनो',
+        'Worm Castings': 'कीड़ा कास्टिंग्स',
+      },
+      'mr': {
+        'productOriginDetails': 'उत्पादन माहिती',
+        'farmerDetails': 'शेतकरी तपशील',
+        'farmerName': 'नाव',
+        'farmerLocation': 'ठिकाण',
+        'farmSize': 'शेताचा आकार',
+        'certification': 'प्रमाणन',
+        'products': 'उत्पादने',
+        'productName': 'उत्पादनाचे नाव',
+        'quantity': 'मात्रा',
+        'growthPeriod': 'विकसन कालावधी',
+        'fertilizerUsed': 'खत वापरले',
+        'distributorDetails': 'वितरक तपशील',
+        'vendorName': 'विक्रेता नाव',
+        'pickingDate': 'चयन तारीख',
+        'noProducts': 'कोणतीही उत्पादने नाहीत.',
+        'noPesticides': 'कोणतेही खत डेटा उपलब्ध नाही.',
+        'farmerNameValue': 'बाळू',
+        'vendorNameValue': 'मोरा',
+        // Product names
+        'apple': 'सफरचंद',
+        'sugarcane': 'ऊस',
+        'rice': 'तांदूळ',
+        'banana': 'केळी',
+        'wheat': 'गहू',
+        // Pesticide names
+        'Compost': 'कंपोस्ट',
+        'Bone Meal': 'हाडांचे जेवण',
+        'Seaweed Extract': 'समुद्री वनस्पती अर्क',
+        'Fish Meal': 'मासे जेवण',
+        'Kelp Meal': 'केल्प जेवण',
+        'Cottonseed Meal': 'कापूस बियाणे जेवण',
+        'Dolomitic Lime': 'डोलोमाइटिक चुना',
+        'Fish Emulsion': 'मासे इमल्शन',
+        'Manure': 'शेण',
+        'Rock Phosphate': 'रॉक फॉस्फेट',
+        'Bat Guano': 'बॅट ग्वानो',
+        'Worm Castings': 'कीडा कास्टिंग्ज',
+      },
+      'te': {
+        'productOriginDetails': 'ఉత్పత్తి మూలం వివరాలు',
+        'farmerDetails': 'వ్యక్తి వివరాలు',
+        'farmerName': 'పేరు',
+        'farmerLocation': 'స్థానం',
+        'farmSize': 'పొలం పరిమాణం',
+        'certification': 'ప్రమాణీకరణ',
+        'products': 'ఉత్పత్తులు',
+        'productName': 'ఉత్పత్తి పేరు',
+        'quantity': 'పరిమాణం',
+        'growthPeriod': 'వృద్ధి కాలం',
+        'fertilizerUsed': 'రసాయనాలు ఉపయోగించారు',
+        'distributorDetails': 'విజ్ఞాపక వివరాలు',
+        'vendorName': 'వెన్డర్ పేరు',
+        'pickingDate': 'చేరుకోవడం తేదీ',
+        'noProducts': 'ఏ ఉత్పత్తులు కనుగొనబడలేదు.',
+        'noPesticides': 'ఏ గుణాత్మక డేటా అందుబాటులో లేదు.',
+        'farmerNameValue': 'బాలు',
+        'vendorNameValue': 'మోరా',
+        // Product names
+        'apple': 'ఆపిల్',
+        'sugarcane': 'చెరకు',
+        'rice': 'బియ్యం',
+        'banana': 'అరటి',
+        'wheat': 'గోధుమ',
+        // Pesticide names
+        'Compost': 'కంపోస్ట్',
+        'Bone Meal': 'బోన్ మీల్',
+        'Seaweed Extract': 'సీవీడ్ ఎక్స్ట్రాక్ట్',
+        'Fish Meal': 'ఫిష్ మీల్',
+        'Kelp Meal': 'కెల్ప్ మీల్',
+        'Cottonseed Meal': 'కాటన్సీడ్ మీల్',
+        'Dolomitic Lime': 'డోలోమిటిక్ లైమ్',
+        'Fish Emulsion': 'ఫిష్ ఎమల్షన్',
+        'Manure': 'గోబరం',
+        'Rock Phosphate': 'రాక్ ఫాస్ఫేట్',
+        'Bat Guano': 'బ్యాట్ గ్వానో',
+        'Worm Castings': 'వోర్మ్ కాస్టింగ్స్',
+      },
+      'ta': {
+        'productOriginDetails': 'தயாரிப்பு தோற்றம் விவரங்கள்',
+        'farmerDetails': 'சாகலக விவரங்கள்',
+        'farmerName': 'பெயர்',
+        'farmerLocation': 'இடம்',
+        'farmSize': 'பண்ணை அளவு',
+        'certification': 'சான்றிதழ்',
+        'products': 'தயாரிப்புகள்',
+        'productName': 'தயாரிப்பு பெயர்',
+        'quantity': 'அளவு',
+        'growthPeriod': 'வளர்ச்சி காலம்',
+        'fertilizerUsed': 'உயர்தர உற்பத்தி',
+        'distributorDetails': 'விநியோகத் தகவல்கள்',
+        'vendorName': 'விற்பனையாளர் பெயர்',
+        'pickingDate': 'தேர்வு தேதி',
+        'noProducts': 'எந்த தயாரிப்புகளும் கிடைக்கவில்லை.',
+        'noPesticides': 'உயர் தரமான தரவு இல்லை.',
+        'farmerNameValue': 'பாலு',
+        'vendorNameValue': 'மோரா',
+        // Product names
+        'apple': 'ஆப்பிள்',
+        'sugarcane': 'கரும்பு',
+        'rice': 'அரிசி',
+        'banana': 'வாழை',
+        'wheat': 'கோதுமை',
+        // Pesticide names
+        'Compost': 'கம்போஸ்ட்',
+        'Bone Meal': 'எலும்பு உணவு',
+        'Seaweed Extract': 'கடல் பாசி சாறு',
+        'Fish Meal': 'மீன் உணவு',
+        'Kelp Meal': 'கெல்ப் உணவு',
+        'Cottonseed Meal': 'பருத்தி விதை உணவு',
+        'Dolomitic Lime': 'டோலோமிடிக் சுண்ணாம்பு',
+        'Fish Emulsion': 'மீன் எமல்ஷன்',
+        'Manure': 'உரம்',
+        'Rock Phosphate': 'ராக் பாஸ்பேட்',
+        'Bat Guano': 'பேட் குவானோ',
+        'Worm Castings': 'புழு வார்ப்புகள்',
+      },
+      'kn': {
+        'productOriginDetails': 'ಉತ್ಪನ್ನ ಮೂಲ ವಿವರಗಳು',
+        'farmerDetails': 'ಕೃಷಿಕ ವಿವರಗಳು',
+        'farmerName': 'ಹೆಸರು',
+        'farmerLocation': 'ಸ್ಥಳ',
+        'farmSize': 'ಫಾರ್ಮ್ ಗಾತ್ರ',
+        'certification': 'ಪ್ರಮಾಣೀಕರಣ',
+        'products': 'ಉತ್ಪನ್ನಗಳು',
+        'productName': 'ಉತ್ಪನ್ನ ಹೆಸರು',
+        'quantity': 'ಪ್ರಮಾಣ',
+        'growthPeriod': 'ವೃದ್ಧಿ ಅವಧಿ',
+        'fertilizerUsed': 'ಎಣ್ಣೆ ಬಳಕೆ',
+        'distributorDetails': 'ವಿತರಕ ವಿವರಗಳು',
+        'vendorName': 'ವ್ಯಾಪಾರಿ ಹೆಸರು',
+        'pickingDate': 'ಕಟ್ಟುವ ದಿನಾಂಕ',
+        'noProducts': 'ಯಾವುದೇ ಉತ್ಪನ್ನಗಳು ಕಂಡುಬಂದಿಲ್ಲ.',
+        'noPesticides': 'ಯಾವುದೇ ಪದಾರ್ಥ ಮಾಹಿತಿಯು ಲಭ್ಯವಿಲ್ಲ.',
+        'farmerNameValue': 'ಬಾಲು',
+        'vendorNameValue': 'ಮೋರಾ',
+        // Product names
+        'apple': 'ಸೇಬು',
+        'sugarcane': 'ಕಬ್ಬು',
+        'rice': 'ಅಕ್ಕಿ',
+        'banana': 'ಬಾಳೆ',
+        'wheat': 'ಗೋಧಿ',
+        // Pesticide names
+        'Compost': 'ಕಂಪೋಸ್ಟ್',
+        'Bone Meal': 'ಬೋನ್ ಮೀಲ್',
+        'Seaweed Extract': 'ಸೀವೀಡ್ ಎಕ್ಸ್ಟ್ರಾಕ್ಟ್',
+        'Fish Meal': 'ಫಿಷ್ ಮೀಲ್',
+        'Kelp Meal': 'ಕೆಲ್ಪ್ ಮೀಲ್',
+        'Cottonseed Meal': 'ಕಾಟನ್ಸೀಡ್ ಮೀಲ್',
+        'Dolomitic Lime': 'ಡೋಲೊಮಿಟಿಕ್ ಲೈಮ್',
+        'Fish Emulsion': 'ಫಿಷ್ ಎಮಲ್ಷನ್',
+        'Manure': 'ಗೊಬ್ಬರ',
+        'Rock Phosphate': 'ರಾಕ್ ಫಾಸ್ಫೇಟ್',
+        'Bat Guano': 'ಬ್ಯಾಟ್ ಗ್ವಾನೋ',
+        'Worm Castings': 'ವರ್ಮ್ ಕಾಸ್ಟಿಂಗ್ಸ್',
+      }
+    };
+  </script>
+</head>
+<body>
+  <!-- Language Selection -->
+  <div class="language-selector">
+    <button onclick="changeLanguage('en')">English</button>
+    <button onclick="changeLanguage('hi')">Hindi</button>
+    <button onclick="changeLanguage('mr')">Marathi</button>
+    <button onclick="changeLanguage('te')">Telugu</button>
+    <button onclick="changeLanguage('ta')">Tamil</button>
+    <button onclick="changeLanguage('kn')">Kannada</button>
+  </div>
+
+  <div class="container">
+    <h1 class="translate" data-key="productOriginDetails">Product Origin Details</h1>
+
+    <!-- Farmer Details -->
+    <div class="section">
+      <h2 class="translate" data-key="farmerDetails">Farmer Details</h2>
+      <p><strong class="translate" data-key="farmerName">Name:</strong> <span class="translate" data-key="farmerNameValue">Balu</span></p>
+      <p><strong class="translate" data-key="farmerLocation">Location:</strong> <%= farmer.location %></p>
+      <p><strong class="translate" data-key="farmSize">Farm Size:</strong> <%= farmer.farmSize %> Acres</p>
+      <p><strong class="translate" data-key="certification">Certification:</strong> <%= farmer.npopCertification ? 'NPOP Certified' : 'Standard' %></p>
+    </div>
+
+    <!-- Products Information -->
+    <div class="section">
+      <h2 class="translate" data-key="products">Products</h2>
+      <% if (farmer.products.length > 0) { %>
+        <ul>
+          <% farmer.products.forEach(function(product) { %>
+            <li>
+              <strong class="translate" data-key="productName">Product Name:</strong> 
+              <span class="product-name" data-product="<%= product.productName %>"><%= product.productName %></span><br>
+              <strong class="translate" data-key="quantity">Quantity:</strong> <%= product.productQuantity %> Quintals<br>
+              <strong class="translate" data-key="growthPeriod">Growth Period:</strong> <%= product.daysToGrow %> Days
+            </li>
+          <% }); %>
+        </ul>
+      <% } else { %>
+        <p class="translate" data-key="noProducts">No products found.</p>
+      <% } %>
+    </div>
+
+    <!-- Fertilizers Information -->
+    <div class="section">
+      <h2 class="translate" data-key="fertilizerUsed">Fertilizer Used</h2>
+      <% if (pesticide.pesticides.length > 0) { %>
+        <ul>
+          <% pesticide.pesticides.forEach(function(p) { %>
+            <li>
+              <strong class="translate" data-key="productName">Name:</strong> 
+              <span class="pesticide-name" data-pesticide="<%= p.name %>"><%= p.name %></span><br>
+              <strong class="translate" data-key="quantity">Quantity:</strong> <%= p.quantity %> Kgs/ltr
+            </li>
+          <% }); %>
+        </ul>
+      <% } else { %>  
+        <p class="translate" data-key="noPesticides">No pesticide data available.</p>
+      <% } %>
+    </div>
+
+    <!-- Distributor Details -->
+    <div class="section">
+      <h2 class="translate" data-key="distributorDetails">Distributor Details</h2>
+      <p><strong class="translate" data-key="vendorName">Vendor Name:</strong> <span class="translate" data-key="vendorNameValue">Mora</span></p>
+      <p><strong class="translate" data-key="location">Location:</strong> <%= distributor.location %></p>
+      <p><strong class="translate" data-key="productName">Product Name:</strong> <%= distributor.productName %></p>
+      <p><strong class="translate" data-key="pickingDate">Picking Date:</strong> <%= new Date(distributor.pickingDate).toLocaleDateString() %></p>
+    </div>
+  </div>
+</body>
+</html>
