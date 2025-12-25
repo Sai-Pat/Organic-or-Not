@@ -5,7 +5,7 @@
 
 ### Blockchain × Machine Learning | IEEE INDISCON 2025
 
-![Project Banner](images/banner.png)
+Project Banner
 
 > **An IEEE-published system that secures food supply chains using Blockchain, Machine Learning, and QR-based traceability.**
 > Designed for transparency, fraud prevention, and real-time decision-making.
@@ -50,8 +50,7 @@ The result is a **trustless yet trustworthy** supply chain ecosystem.
 
 ## 🏗️ System Architecture
 
-![System Architecture](images/architecture.png)
-
+System Architecture
 ### Key Components
 
 * **Producers** – Register origin and production data
@@ -76,7 +75,7 @@ The result is a **trustless yet trustworthy** supply chain ecosystem.
 
 ## 🤖 Machine Learning Module
 
-![ML Results](images/ml-results.png)
+ML Results
 
 The ML component is responsible for:
 
@@ -178,3 +177,4 @@ Blockchain, Machine Learning, Supply Chains, QR Codes, Fraud Detection, Real-Tim
 
 Contributions, suggestions, and issues are welcome.
 If you find this project useful, please ⭐ **star the repository**.
+
